@@ -14,6 +14,29 @@ console.log (session, "session")
 const user = session?.user;
 console.log (user, "session");
 
+const handleBooking = async() =>{
+  const bookingData = {
+    userId:user.id,
+    userName: user.name,
+    userEmail:user.email,
+    tutorId:allTutor._id,
+    tutorName:allTutor.name,
+    tutorImage:allTutor.image,
+    tutorStatus:allTutor.status
+  }
+
+  // const bookingData = { userName, userId, tutorName, tutorImage, tutorStatus, tutorId }
+      
+      const res = await fetch("http://localhost:5000/my-tutors", {
+          method: "POST",
+          headers: {
+              'content-type': 'application/json'
+          },
+          body: JSON.stringify(bookingData)
+      })
+      const data = await res.json()
+}
+
 // const {price, _id, tutorName} =allTutor;
 // const handleBooking = async () => (
 // const bookingData = {
@@ -28,7 +51,8 @@ console.log (user, "session");
 // define defaultValue
   const defaultName = user?.name || '';
   const defaultEmail = user?.email || '';
-  
+
+ 
       const router = useRouter(); 
       
     const { tutorName, image, subject, location, hourlyFee, availableSlots, availableDays,sessionStartDate, timeSlot, institution, teachingMode} = allTutor;
@@ -73,7 +97,7 @@ const onSubmit = async(e) =>{
               <Surface variant="default">
                 <form  onSubmit={onSubmit} className="flex flex-col gap-4">
                
-
+<ToastContainer />
                   <TextField defaultValue={defaultName} className="w-full" name="name" type="text">
                     <Label>Student name</Label>
                     <Input
@@ -110,7 +134,7 @@ const onSubmit = async(e) =>{
               {/* <Button  type="submit" slot="close"> <Link href={'/my-tutors'}></Link> Book session
                 </Button>  */}
 <Link href={'/my-tutors'}>
-  <Button type="submit" slot="close">Book session</Button>
+  <Button onClick={handleBooking} type="submit" slot="close">Book session</Button>
 </Link>
 
                   </div>

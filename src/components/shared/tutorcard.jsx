@@ -19,7 +19,7 @@ const TutorCard = ({allTutor}) => {
                 <Image
                     alt="Tutor Image"
                     className="mt-6 cover w-fit object-cover group-hover:scale-110 transition-transform duration-700"
-                    src={image}
+                    src={image|| "/placeholder-image.jpg"}
                     width={300}
                     height={100}
                  
