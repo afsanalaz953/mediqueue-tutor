@@ -1,0 +1,78 @@
+"use client";
+import React from 'react';
+import Link from 'next/link'
+// import {Envelope} from "@gravity-ui/icons";
+import {Button, Input, Label, Modal, Surface, TextField} from "@heroui/react";
+
+export function EditModal({allTutor}){
+    const { tutorName, image, subject, location, hourlyFee, availableSlots, availableDays,sessionStartDate, timeSlot, institution, teachingMode} = allTutor;
+// const EditModal = () => {
+const onSubmit = async(e) =>{
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const allTutor = Object.fromEntries(formData.entries())
+    console.log(allTutor);
+
+}
+    return (
+   
+<Modal>
+    <Button className="font-bold rounded-xl px-6 w-full">Book Session</Button>
+      <Modal.Backdrop>
+        <Modal.Container placement="auto">
+          <Modal.Dialog className="sm:max-w-md">
+            <Modal.CloseTrigger />
+            <Modal.Header>
+              <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
+                {/* <Envelope className="size-5" /> */}
+              </Modal.Icon>
+              <Modal.Heading>Contact Us</Modal.Heading>
+              <p className="mt-1.5 text-sm leading-5 text-muted">
+                Fill out the form below and we get back to you. The modal adapts automatically
+                when the keyboard appears on mobile.
+              </p>
+            </Modal.Header>
+            <Modal.Body className="p-6">
+              <Surface variant="default">
+                <form  onSubmit={onSubmit} className="flex flex-col gap-4">
+                  <TextField className="w-full" name="name" type="text">
+                    <Label>Student name</Label>
+                    <Input placeholder="Enter your name" />
+                  </TextField>
+                  <TextField className="w-full" name="email" type="email">
+                    <Label>Student Email</Label>
+                    <Input placeholder="Email" />
+                  </TextField>
+                  <TextField className="w-full" name="phone" type="tel">
+                    <Label>Phone</Label>
+                    <Input placeholder="Enter your phone number" />
+                  </TextField>
+                  <TextField   defaultValue={tutorName}  className="w-full" name="name">
+                    <Label>Tutor </Label>
+                    <Input 
+                    placeholder="Tutor" />
+                  </TextField>
+                  {/* <TextField className="w-full" name="message">
+                    <Label>Message</Label>
+                    <Input placeholder="Enter your message" />
+                  </TextField> */}
+                </form>
+              </Surface>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button slot="close" variant="secondary">
+                Cancel
+              </Button>
+              <Button slot="close">Send Message</Button>
+            </Modal.Footer>
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
+ 
+
+    );
+};
+
+
+export default EditModal;

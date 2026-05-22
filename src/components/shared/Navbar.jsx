@@ -1,0 +1,80 @@
+"use client"
+import React from 'react';
+// import logo from "@/assets/logo.png"
+import Image from "next/image"
+import {Button} from "@heroui/react";
+
+import Link from "next/link"
+import { usePathname } from 'next/navigation';
+import { authClient } from "@/lib/auth-client"
+
+const Navbar = () => {
+const { data: session, isPending } = authClient.useSession();
+console.log (session, "session")
+
+const user = session?.user;
+console.log (user, "session");
+
+
+    const pathname = usePathname ();
+    console.log (pathname, "pathname");
+
+    const isActive = (href) =>{
+       return href === pathname;
+    };
+    
+    return (
+        <div className='flex flex-col-3 justify-between container mx-auto my-5 shadow-md p-4'>
+            <div className='flex gap-3'>
+            {/* <Image src={logo}
+      alt="Picture of the author"
+      width={50}
+      height={50} /> */}
+            <p className='font-bold text-md text-green-500'>Tutors-Hunting</p> 
+            </div>
+            
+                <ul className='flex gap-4'>
+                    <li><Link href={"/"} className={`${isActive ("/") ? " border-b-4 border-b-green-600": "" }`}  >Home</Link></li>
+                    <li><Link href={"/tutors"} className={`${isActive ("/tutors") ? " border-b-4 border-b-green-600" : ""}`} >Tutors</Link></li>
+                    <li><Link href={"/add-tutor"} className={`${isActive ("/add-tutor") ? " border-b-4 border-b-green-600" : ""}`} >Add Tutor</Link></li>
+                    <li><Link href={"/my-tutors"} className={`${isActive ("/my-tutors") ? " border-b-4 border-b-green-600" : ""}`} >My Tutors</Link></li>
+                    <li><Link href={"/my-sessions"} className={`${isActive ("/my-sessions") ? " border-b-4 border-b-green-600" : ""}`} >My Sessions</Link></li>
+                    <li><Link href={"/profile"} className={`${isActive ("/profile") ? " border-b-4 border-b-green-600" : ""}`} >My Profile</Link></li>
+                    
+                </ul> 
+ <div className='flex gap-2  items-center'>
+   {isPending ? <span className="loading loading-spinner text-success"></span> :
+    user ? ( <div className='flex gap-2 items-center'>
+           
+    <div className='rounded-full flex gap-2'> 
+        <Image src={user.image || userAvatar  }
+        // referrerPolicy='no-referrer'
+      alt=" author"
+      width={50}
+      height={50} 
+      />  
+      <h2>Hi,{user.name}</h2> 
+                  </div>
+                  <div></div>
+        
+                    <button className='btn btn-success' 
+                    onClick={async () => await authClient.signOut()} >
+                       Log Out</button>
+   </div>)
+   
+                  :( <div className='flex gap-3'>
+                    <Button type="submit"  className=' bg-green-500' ><Link href = {'/login'}></Link> Log In </Button>
+                  
+         
+ <Button type="submit"  className=' bg-green-500' ><Link href = {'/register'}></Link> Register </Button>
+                    {/* <button className='btn btn-success'>
+                        <Link href ={"/register"}>Register</Link>
+                        </button> */}
+                    
+                    </div>)}
+        </div>
+        </div>
+    );
+};
+
+export default Navbar;
