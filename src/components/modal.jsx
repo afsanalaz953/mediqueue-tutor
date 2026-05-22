@@ -5,9 +5,32 @@ import Link from 'next/link'
 // import {Envelope} from "@gravity-ui/icons";
 import {Button, Input, Label, Modal, Surface, TextField} from "@heroui/react";
 import { ToastContainer, toast } from 'react-toastify';
+import { authClient } from "@/lib/auth-client"
 
 export function EditModal({allTutor}){
+  // users session
+const { data: session, isPending } = authClient.useSession();
+console.log (session, "session")
+const user = session?.user;
+console.log (user, "session");
+
+// const {price, _id, tutorName} =allTutor;
+// const handleBooking = async () => (
+// const bookingData = {
+// userId: user.id,
+// userImage:user.name,
+// tutorId : allTutor._id,
+
+
+// } 
+
+// )
+// define defaultValue
+  const defaultName = user?.name || '';
+  const defaultEmail = user?.email || '';
+  
       const router = useRouter(); 
+      
     const { tutorName, image, subject, location, hourlyFee, availableSlots, availableDays,sessionStartDate, timeSlot, institution, teachingMode} = allTutor;
 // const EditModal = () => {
 const onSubmit = async(e) =>{
@@ -51,13 +74,20 @@ const onSubmit = async(e) =>{
                 <form  onSubmit={onSubmit} className="flex flex-col gap-4">
                
 
-                  <TextField className="w-full" name="name" type="text">
+                  <TextField defaultValue={defaultName} className="w-full" name="name" type="text">
                     <Label>Student name</Label>
-                    <Input placeholder="Enter your name" />
+                    <Input
+                     placeholder="Enter your name"
+                     
+                     />
                   </TextField>
-                  <TextField className="w-full" name="email" type="email">
+                  <TextField  defaultValue={defaultEmail}  className="w-full" name="email" type="email">
                     <Label>Student Email</Label>
-                    <Input placeholder="Email" />
+                    <Input 
+                     
+                    placeholder="Email"
+                    
+                    />
                   </TextField>
                   <TextField className="w-full" name="phone" type="tel">
                     <Label>Phone</Label>

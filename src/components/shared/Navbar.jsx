@@ -62,11 +62,22 @@ console.log (user, "session");
                        Log Out</button>
    </div>)
    
-                  :( <div className='flex gap-3'>
-                    <Button type="submit"  className=' bg-green-500' ><Link href = {'/login'}></Link> Log In </Button>
-                  
+                   :( <div className='flex gap-3'>
+                     {/* <Button type="submit"  className=' bg-green-500' ><Link href = {'/login'}></Link> Log In </Button> */}
+                   
+                   <Link href="/login">
+  <Button type="submit" className="bg-green-500">
+    Log In
+  </Button>
+</Link>
+          <Link href="/register">
+  <Button type="submit" className="bg-green-500">
+    Register
+  </Button>
+</Link>
+                   
          
- <Button type="submit"  className=' bg-green-500' ><Link href = {'/register'}></Link> Register </Button>
+ {/* <Button type="submit"  className=' bg-green-500' ><Link href = {'/register'}></Link> Register </Button> */}
                     {/* <button className='btn btn-success'>
                         <Link href ={"/register"}>Register</Link>
                         </button> */}
