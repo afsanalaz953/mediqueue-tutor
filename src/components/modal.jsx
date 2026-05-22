@@ -1,10 +1,13 @@
 "use client";
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link'
 // import {Envelope} from "@gravity-ui/icons";
 import {Button, Input, Label, Modal, Surface, TextField} from "@heroui/react";
+import { ToastContainer, toast } from 'react-toastify';
 
 export function EditModal({allTutor}){
+      const router = useRouter(); 
     const { tutorName, image, subject, location, hourlyFee, availableSlots, availableDays,sessionStartDate, timeSlot, institution, teachingMode} = allTutor;
 // const EditModal = () => {
 const onSubmit = async(e) =>{
@@ -13,8 +16,19 @@ const onSubmit = async(e) =>{
     const allTutor = Object.fromEntries(formData.entries())
     console.log(allTutor);
 
+ // Show success toast
+        toast.success('Session booking successful', {
+            duration: 2000,
+            position: 'top-center',
+        });
+// Navigation after success
+        setTimeout(() => {
+            router.push('/my-tutors');
+        }, 2000);
 }
+ 
     return (
+        <>
    
 <Modal>
     <Button className="font-bold rounded-xl px-6 w-full">Book Session</Button>
@@ -35,6 +49,8 @@ const onSubmit = async(e) =>{
             <Modal.Body className="p-6">
               <Surface variant="default">
                 <form  onSubmit={onSubmit} className="flex flex-col gap-4">
+               
+
                   <TextField className="w-full" name="name" type="text">
                     <Label>Student name</Label>
                     <Input placeholder="Enter your name" />
@@ -56,21 +72,30 @@ const onSubmit = async(e) =>{
                     <Label>Message</Label>
                     <Input placeholder="Enter your message" />
                   </TextField> */}
+                  <div className='flex gap-12'>
+                <Button slot="close" variant="secondary">
+                Cancel
+             </Button>
+
+              {/* <Button  type="submit" slot="close"> <Link href={'/my-tutors'}></Link> Book session
+                </Button>  */}
+<Link href={'/my-tutors'}>
+  <Button type="submit" slot="close">Book session</Button>
+</Link>
+
+                  </div>
+                   
                 </form>
               </Surface>
             </Modal.Body>
-            <Modal.Footer>
-              <Button slot="close" variant="secondary">
-                Cancel
-              </Button>
-              <Button slot="close">Send Message</Button>
-            </Modal.Footer>
+           
           </Modal.Dialog>
         </Modal.Container>
       </Modal.Backdrop>
     </Modal>
+        
  
-
+</>
     );
 };
 
