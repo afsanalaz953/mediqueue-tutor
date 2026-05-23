@@ -20,14 +20,14 @@ const handleBooking = async() =>{
     userName: user.name,
     userEmail:user.email,
     tutorId:allTutor._id,
-    tutorName:allTutor.name,
+    tutorName:allTutor.tutorName,
     tutorImage:allTutor.image,
     tutorStatus:allTutor.status
   }
 
   // const bookingData = { userName, userId, tutorName, tutorImage, tutorStatus, tutorId }
       
-      const res = await fetch("http://localhost:5000/my-tutors", {
+      const res = await fetch("http://localhost:5000/booking", {
           method: "POST",
           headers: {
               'content-type': 'application/json'
@@ -65,12 +65,12 @@ const onSubmit = async(e) =>{
 
  // Show success toast
         toast.success('Session booking successful', {
-            duration: 2000,
+            duration: 1000,
             position: 'top-center',
         });
 // Navigation after success
         setTimeout(() => {
-            router.push('/my-tutors');
+            router.push('/my-sessions');
         }, 2000);
 }
  
@@ -96,8 +96,7 @@ const onSubmit = async(e) =>{
             <Modal.Body className="p-6">
               <Surface variant="default">
                 <form  onSubmit={onSubmit} className="flex flex-col gap-4">
-               
-<ToastContainer />
+               <ToastContainer />
                   <TextField defaultValue={defaultName} className="w-full" name="name" type="text">
                     <Label>Student name</Label>
                     <Input
@@ -133,8 +132,8 @@ const onSubmit = async(e) =>{
 
               {/* <Button  type="submit" slot="close"> <Link href={'/my-tutors'}></Link> Book session
                 </Button>  */}
-<Link href={'/my-tutors'}>
-  <Button onClick={handleBooking} type="submit" slot="close">Book session</Button>
+<Link href={'/my-sessions'}>
+  <Button onClick={handleBooking} type="submit" slot="close">Booked session</Button>
 </Link>
 
                   </div>
