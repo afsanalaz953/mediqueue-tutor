@@ -3,6 +3,8 @@ import { auth } from "@/lib/auth"; // path to your Better Auth server instance
 import { headers } from "next/headers";
 import Image from "next/image";
 import { Table } from '@heroui/react';
+import CancelledButton from "@/components/shared/CancelledButton";
+import {Button} from "@heroui/react"
 
 const MyBookingSessionsPage = async() => {
 
@@ -32,7 +34,9 @@ const bookings = await res.json();
         <Table.Column isRowHeader>Tutor Name</Table.Column>
         <Table.Column>Student Name</Table.Column>
         <Table.Column>User Email</Table.Column>
+        <Table.Column>booking Id</Table.Column>
         <Table.Column>Status</Table.Column>
+        <Table.Column>Action</Table.Column>
       </Table.Header>
       <Table.Body>
         {bookings && bookings.map((bookedData) => (
@@ -48,8 +52,10 @@ const bookings = await res.json();
             </Table.Cell>
             <Table.Cell>{bookedData.tutorName}</Table.Cell>
             <Table.Cell>{bookedData.userName}</Table.Cell>
+            <Table.Cell>{bookedData._id}</Table.Cell>
             <Table.Cell>{bookedData.userEmail}</Table.Cell>
-            <Table.Cell>{bookedData.status || 'Active'}</Table.Cell>
+            <Table.Cell className="" >  <Button> {bookedData.status || 'Confermed'} </Button> </Table.Cell>
+            <Table.Cell> <CancelledButton bookingId = {bookedData._id} /> </Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>

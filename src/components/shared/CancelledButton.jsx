@@ -3,17 +3,33 @@
 
 import { AlertDialog, Button } from "@heroui/react";
 
-const CancelledBookingButton = () => {
+const CancelledBookingButton = ({bookingId}) => {
+const handleCancelBooking = async () =>{
+
+const res = await fetch(`http://localhost:5000/booking/${bookingId}`,{
+method: "DELETE",
+headers:{
+    "content-type" : "application/json"
+}
+})
+
+const data = await res.json;
+console.log(data);
+}
+
+
 
     return (
         <AlertDialog>
-            <Button
+            {/* <Button
                 color="danger"
                 variant="light"
                 size="sm"
             >
                 Cancel
-            </Button>
+            </Button> */}
+               <Button variant="danger" type= "submit">Cancel</Button>
+
             <AlertDialog.Backdrop>
                 <AlertDialog.Container>
                     <AlertDialog.Dialog className="sm:max-w-100">
@@ -33,9 +49,10 @@ const CancelledBookingButton = () => {
                                 slot="close"
                                 variant="tertiary"
                             >
-                                Keep Enrollment
+                                Keep Booking
                             </Button>
                             <Button
+                            onClick = { handleCancelBooking }
                                 slot="close"
                                 color="danger"
                                 className="font-bold"
