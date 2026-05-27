@@ -9,14 +9,19 @@ import {Button} from "@heroui/react"
 const MyBookingSessionsPage = async() => {
 
 const session = await auth.api.getSession({
-    headers: await headers() // you need to pass the headers object.
-})
-const user = session?.user
+     headers: await headers(), // you need to pass the headers object.
+ });
+ const user = session?.user;
 console.log(session)
-const res = await fetch(`http://localhost:5000/booking/${user.id}`);
+// user id dhore ante hobe
+const res = await fetch(`http://localhost:5000/booking/${user?.id}`,{
+   cache: 'no-store',
+});
+
+
 
 const bookings = await res.json();
-   console.log(bookings)
+   console.log(bookings, "bookings")
 
 
 
@@ -34,13 +39,13 @@ const bookings = await res.json();
         <Table.Column isRowHeader>Tutor Name</Table.Column>
         <Table.Column>Student Name</Table.Column>
         <Table.Column>User Email</Table.Column>
-        <Table.Column>booking Id</Table.Column>
+        {/* <Table.Column>booking Id</Table.Column> */}
         <Table.Column>Status</Table.Column>
         <Table.Column>Action</Table.Column>
       </Table.Header>
       <Table.Body>
         {bookings && bookings.map((bookedData) => (
-          <Table.Row key={bookedData._id}>
+          <Table.Row key={bookedData?._id}>
             <Table.Cell>
               <Image
                 src={bookedData.tutorImage}
@@ -52,9 +57,10 @@ const bookings = await res.json();
             </Table.Cell>
             <Table.Cell>{bookedData.tutorName}</Table.Cell>
             <Table.Cell>{bookedData.userName}</Table.Cell>
-            <Table.Cell>{bookedData._id}</Table.Cell>
+            {/* <Table.Cell>{bookedData._id}</Table.Cell> */}
             <Table.Cell>{bookedData.userEmail}</Table.Cell>
-            <Table.Cell className="" >  <Button> {bookedData.status || 'Confermed'} </Button> </Table.Cell>
+            <Table.Cell className="" >  <Button>{bookedData.teachingMode}</Button> </Table.Cell>
+            {/* <Table.Cell> <Button bookingId = {bookedData._id} /> </Table.Cell> */}
             <Table.Cell> <CancelledButton bookingId = {bookedData._id} /> </Table.Cell>
           </Table.Row>
         ))}
@@ -62,22 +68,6 @@ const bookings = await res.json();
     </Table.Content>
   </Table.ScrollContainer>
 </Table>
-
-{/* {bookings.map(bookedData => <div key={bookedData._id}>
-
-<h2>{bookedData.userEmail} </h2>
-</div>)} */}
-{/* {bookings && bookings.map(bookedData => <div key={bookedData._id}>
-    <Image
-    src={bookedData.tutorImage} 
-    alt="tutor photo"
-    width={20}
-    height={20}
-    className='rounded-full'
-    
-    
-    />
-   <h2>{bookedData.userEmail} </h2> */}
 
  </div>
         </div>

@@ -10,7 +10,7 @@ images: {
         port: '',
         // pathname: '**',
         // search: '',
-      },
+      }
     ],
   },
 

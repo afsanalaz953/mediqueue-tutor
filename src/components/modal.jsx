@@ -16,7 +16,7 @@ console.log (user, "session");
 
 const handleBooking = async() =>{
   const bookingData = {
-    userId:user.id,
+    userId:user?.id,
     userName: user.name,
     userEmail:user.email,
     tutorId:allTutor._id,
@@ -27,28 +27,22 @@ const handleBooking = async() =>{
 
   // const bookingData = { userName, userId, tutorName, tutorImage, tutorStatus, tutorId }
       
-      const res = await fetch("http://localhost:5000/booking", {
+      const res = await fetch("http://localhost:5000/booking/my-session", {
           method: "POST",
           headers: {
               'content-type': 'application/json'
           },
           body: JSON.stringify(bookingData)
       })
-      const data = await res.json()
+      const data = await res.json();
+// Show success toast
+        toast.success('Session booking successful', {
+            duration: 2000,
+            position: 'top-center',
+});
 }
 
-// const {price, _id, tutorName} =allTutor;
-// const handleBooking = async () => (
-// const bookingData = {
-// userId: user.id,
-// userImage:user.name,
-// tutorId : allTutor._id,
 
-
-// } 
-
-// )
-// define defaultValue
   const defaultName = user?.name || '';
   const defaultEmail = user?.email || '';
 
@@ -63,11 +57,8 @@ const onSubmit = async(e) =>{
     const allTutor = Object.fromEntries(formData.entries())
     console.log(allTutor);
 
- // Show success toast
-        toast.success('Session booking successful', {
-            duration: 1000,
-            position: 'top-center',
-        });
+ 
+        
 // Navigation after success
         setTimeout(() => {
             router.push('/my-sessions');

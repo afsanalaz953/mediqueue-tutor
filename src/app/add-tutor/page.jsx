@@ -1,35 +1,57 @@
 "use client"
 import React from 'react';
 import {TextField, Label,Input,FieldError, Select,ListBox , Button, } from "@heroui/react"
+// import { auth } from "@/lib/auth"; // path to your Better Auth server instance
+// import { headers } from "next/headers";
+
 
 const AddTutorPage = () => {
 const onSubmit = async(e) =>{
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
     const allTutor = Object.fromEntries(formData.entries())
-    console.log(allTutor)
+    console.log("allTutor", allTutor);
 
-    const res = await fetch ('http://localhost:5000/tutors',{
+ const res =  await fetch ('http://localhost:5000/add-tutor',{
 
    method : 'POST',
    headers : {
-    'content-type' : 'application/json'
+  'content-type' : 'application/json'
    
      }, 
-     body: JSON.stringify(allTutor)
- })
+    body: JSON.stringify(allTutor)
+    })
 const data = await res.json()
-console.log( 'data after post' ,data);
+console.log( 'data after post',data);
+ if (res.ok) {
+      e.target.reset(); // Reset the form after successful submission
+    }
+  }
+
+
+  // const tutorAddingData = {
+  //   userId:user?.id,
+  //   tutorId: allTutor._id,
+  //   userName: user?.name,
+  //  subject:allTutor.subject,
+  //   slots:allTutor.totalSlots,
+  //   tutorName:allTutor.tutorName,
+  //   tutorImage:allTutor.imageUrl,
+  //   session: allTutor.sessionStartDate,
+  //   price:allTutor.price,
+  //  mode:allTutor. teachingMode
+  
+
+ 
 
   
-}
 
     return (
         <div>
             <h1 className='text-2xl font-bold text-blue-800 text-center my-8'>Add Tutor </h1>
     <div className='formdata container mx-auto border-0 shadow-lg w-3xl'>
                 <form onSubmit={onSubmit}
-            className="p-10 space-y-8 m-10"
+            className="p-10 space-y-8 m-10" 
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Destination Name */}
@@ -212,6 +234,6 @@ console.log( 'data after post' ,data);
         </div>
     );
 
-};
+  };
 
 export default AddTutorPage;

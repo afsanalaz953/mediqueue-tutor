@@ -11,7 +11,8 @@ const RegisterPage = () => {
 const { register, handleSubmit,formState: { errors }} = useForm();
    const router = useRouter();
     const handleRegisterFunc = async(data) => {
-    console.log(data, "data");
+    console.log(data, "data"); 
+    // can get this upper data  //  
     const {name, email, password, image} = data;
     
 
@@ -23,14 +24,14 @@ const { register, handleSubmit,formState: { errors }} = useForm();
     callbackURL: "/login",
   
 });
-console.log (res, error);
+console.log ("data:res",res, "Error",error);
 
 if (error) {
     alert(error.message)
 }
  if (res) {
     alert("Signup Successful")
-    router.push("/login");
+    router.push("/login")
  }   
     };
 

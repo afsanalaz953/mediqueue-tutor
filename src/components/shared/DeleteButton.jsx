@@ -3,18 +3,18 @@
 
 import { AlertDialog, Button } from "@heroui/react";
 
-const CancelledBookingButton = ({bookingId}) => {
-const handleCancelBooking = async () =>{
+const DeleteAddingButton = ({formTutorId}) => {
+const handleDeleteButton = async () =>{
 
-const res = await fetch(`http://localhost:5000/booking/${bookingId}`,{
+const res = await fetch(`http://localhost:5000/my-tutors/${formTutorId}`,{
 method: "DELETE",
 headers:{
     "content-type" : "application/json"
 }
 })
 
-const data = await res.json();
-console.log(data);
+const data = await res.json ();
+console.log( "delete response",   data);
 }
 
 
@@ -49,10 +49,11 @@ console.log(data);
                                 slot="close"
                                 variant="tertiary"
                             >
-                                Keep Booking
+                               keep Tutor
                             </Button>
                             <Button
-                            onClick = { handleCancelBooking }
+
+                            onClick = {handleDeleteButton}
                                 slot="close"
                                 color="danger"
                                 className="font-bold"
@@ -68,4 +69,4 @@ console.log(data);
     );
 };
 
-export default CancelledBookingButton;
+export default DeleteAddingButton;

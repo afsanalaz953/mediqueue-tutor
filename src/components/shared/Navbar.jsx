@@ -9,14 +9,17 @@ import { usePathname } from 'next/navigation';
 import { authClient } from "@/lib/auth-client"
 
 const Navbar = () => {
-const { data: session, isPending } = authClient.useSession();
+const { data: session,  isPending } = authClient.useSession();
 console.log (session, "session")
 
 const user = session?.user;
-console.log (user, "session");
+console.log (user, "user");
 
+// const handleSignOut = async () => {
+//     await authClient.signOut();
+// };
 
-    const pathname = usePathname ();
+    const pathname = usePathname();
     console.log (pathname, "pathname");
 
     const isActive = (href) =>{
@@ -42,9 +45,9 @@ console.log (user, "session");
                     <li><Link href={"/profile"} className={`${isActive ("/profile") ? " border-b-4 border-b-green-600" : ""}`} >My Profile</Link></li>
                     
                 </ul> 
- <div className='flex gap-2  items-center'>
+  <div className='flex gap-2  items-center'>
    {isPending ? <span className="loading loading-spinner text-success"></span> :
-    user ? ( <div className='flex gap-2 items-center'>
+    user ? ( <div className='flex gap-2 items-center'> 
            
     <div className='rounded-full flex gap-2'> 
         <Image src={user.image || userAvatar  }
@@ -63,8 +66,8 @@ console.log (user, "session");
    </div>)
    
                    :( <div className='flex gap-3'>
-                     {/* <Button type="submit"  className=' bg-green-500' ><Link href = {'/login'}></Link> Log In </Button> */}
-                   
+                      <Button type="submit"  className=' bg-green-500' ><Link href = {'/login'}></Link> Log In </Button> 
+                    
                    <Link href="/login">
   <Button type="submit" className="bg-green-500">
     Log In

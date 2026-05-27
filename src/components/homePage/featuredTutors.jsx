@@ -2,9 +2,17 @@ import React from 'react';
 import TutorCard from "@/components/shared/tutorcard"
 
 
+// const FeatureTutors = async() => {
+// const res = await fetch(`${process.env.NEXT_SERVER_URL}/featured`),{
+// cache:"no-store"
+// }
 const FeatureTutors = async() => {
-const res = await fetch(`${process.env.NEXT_SERVER_URL}/featured`)
-cache:"no-store"
+  const res = await fetch(`http://localhost:5000/featured`, {
+    cache: "no-store",
+  })
+  if (!res.ok) {
+      throw new Error(`Failed to fetch featured tutors: ${res.status}`);
+    }
 
 const topTutors = await res.json()
    console.log( "topTutors", topTutors); 

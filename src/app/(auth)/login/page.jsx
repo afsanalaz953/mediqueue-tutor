@@ -21,10 +21,10 @@ const { register, handleSubmit,  formState: { errors }} = useForm ();
 
 const [isShowPassword, setIsShowPassword] = useState(false);
 
- const handleGoogleSignin = async () => {
+const handleGoogleSignin = async () => {
 const data = await authClient.signIn.social({
-    provider: "google",
-  });
+ provider: "google",
+ });
 console.log(data, "data");
 }
 
