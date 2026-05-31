@@ -15,6 +15,7 @@ headers:{
 
 const data = await res.json();
 console.log(data);
+window.location.reload();
 }
 
 

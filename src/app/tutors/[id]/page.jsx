@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button, Chip } from "@heroui/react";
 import { BookOpen, Clock } from "lucide-react";
-import EditModal from "@/components/modal"
+import BookedModal from "@/components/modal"
 
 const TutorDetailsPage = async({params}) => {
     const {id} = await params
@@ -80,17 +80,9 @@ const { tutorName, image, subject, location, hourlyFee, availableSlots, availabl
                       <p className='text-slate-500 ' > {teachingMode} </p> 
                 </div>
                 <div>
-                <EditModal  allTutor = {allTutor}  />       
+                <BookedModal  allTutor = {allTutor}  />       
                 </div>
-
-
-
-
-
         </div>
-
-
-
              </div>
           
         </div>

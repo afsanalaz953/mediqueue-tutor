@@ -1,5 +1,4 @@
 
-
 import React from 'react';
 import { Table } from '@heroui/react';
 import {Button} from "@heroui/react"
@@ -7,6 +6,7 @@ import   DeleteAddingButton from "@/components/shared/DeleteButton";
 import { auth } from "@/lib/auth"; // path to your Better Auth server instance
 import { headers } from "next/headers";
 import Image from "next/image";
+import EditModal from "@/components/EditModal"
 
 
 const MyTutorPage = async() => {
@@ -16,7 +16,7 @@ const session = await auth.api.getSession({
  const user = session?.user
 console.log(session, "formTutor")
 
-const res = await fetch ("http://localhost:5000/my-tutors")
+const res = await fetch ("http://localhost:5000/my-tutors/")
 const tutorList = await res.json()
 console.log(tutorList, "tutorlist")
 
@@ -39,7 +39,7 @@ console.log(tutorList, "tutorlist")
                       <Table.Column className="text-lg font-bold" >Price</Table.Column>
                       <Table.Column  className="text-lg font-bold">Slots</Table.Column>
                        <Table.Column  className="text-lg font-bold">Status</Table.Column>
-                      {/* <Table.Column>TutorId</Table.Column> */}
+                     <Table.Column>TutorId</Table.Column> 
                       <Table.Column className="text-lg font-bold" >Session-Start-Date</Table.Column>
                       <Table.Column className="text-lg font-bold text-center"> Action</Table.Column>
                     </Table.Header>
@@ -60,7 +60,7 @@ console.log(tutorList, "tutorlist")
                           </Table.Cell>
                           <Table.Cell>{formTutors.tutorName}</Table.Cell>
                           <Table.Cell>{user.name}</Table.Cell>
-                          {/* <Table.Cell>{formTutors._id}</Table.Cell>  */}
+                           <Table.Cell>{formTutors._id}</Table.Cell>  
                           <Table.Cell>{formTutors.subject}</Table.Cell>                   
                           <Table.Cell>$ {formTutors.price}</Table.Cell>
                            <Table.Cell>{formTutors.totalSlots}</Table.Cell>
@@ -68,7 +68,8 @@ console.log(tutorList, "tutorlist")
                         
                           <Table.Cell> {formTutors.sessionStartDate}</Table.Cell >
                          <Table.Cell className="flex gap-3 bg-white p-8">
-                         <Button>  {'Update'} </Button> 
+                         {/* <Button>  {'Edit'} </Button>  */}
+                         <EditModal formTutors = {formTutors} />
                            < DeleteAddingButton  formTutorId = {formTutors._id} />
                        </Table.Cell>
                         </Table.Row>

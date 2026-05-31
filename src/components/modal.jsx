@@ -7,7 +7,7 @@ import {Button, Input, Label, Modal, Surface, TextField} from "@heroui/react";
 import { ToastContainer, toast } from 'react-toastify';
 import { authClient } from "@/lib/auth-client"
 
-export function EditModal({allTutor}){
+export function BookedModal({allTutor}){
   // users session
 const { data: session, isPending } = authClient.useSession();
 console.log (session, "session")
@@ -27,7 +27,7 @@ const handleBooking = async() =>{
 
   // const bookingData = { userName, userId, tutorName, tutorImage, tutorStatus, tutorId }
       
-      const res = await fetch("http://localhost:5000/booking/my-session", {
+      const res = await fetch("http://localhost:5000/booking/", {
           method: "POST",
           headers: {
               'content-type': 'application/json'
@@ -76,7 +76,7 @@ const onSubmit = async(e) =>{
             <Modal.CloseTrigger />
             <Modal.Header>
               <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
-                {/* <Envelope className="size-5" /> */}
+              
               </Modal.Icon>
               <Modal.Heading>Contact Us</Modal.Heading>
               <p className="mt-1.5 text-sm leading-5 text-muted">
@@ -144,4 +144,4 @@ const onSubmit = async(e) =>{
 };
 
 
-export default EditModal;
+export default BookedModal;

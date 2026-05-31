@@ -13,6 +13,7 @@ const session = await auth.api.getSession({
  });
  const user = session?.user;
 console.log(session)
+
 // user id dhore ante hobe
 const res = await fetch(`http://localhost:5000/booking/${user?.id}`,{
    cache: 'no-store',

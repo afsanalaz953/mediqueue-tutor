@@ -1,9 +1,9 @@
 "use client";
-
-
 import { AlertDialog, Button } from "@heroui/react";
 
+
 const DeleteAddingButton = ({formTutorId}) => {
+    console.log(formTutorId)
 const handleDeleteButton = async () =>{
 
 const res = await fetch(`http://localhost:5000/my-tutors/${formTutorId}`,{
@@ -14,7 +14,8 @@ headers:{
 })
 
 const data = await res.json ();
-console.log( "delete response",   data);
+console.log( "delete response", data);
+window.location.reload();
 }
 
 
@@ -28,7 +29,7 @@ console.log( "delete response",   data);
             >
                 Cancel
             </Button> */}
-               <Button variant="danger" type= "submit">Cancel</Button>
+               <Button variant="danger" type= "submit">Belete</Button>
 
             <AlertDialog.Backdrop>
                 <AlertDialog.Container>
@@ -59,7 +60,7 @@ console.log( "delete response",   data);
                                 className="font-bold"
 
                             >
-                                Yes, Cancel
+                            Delete Tutor
                             </Button>
                         </AlertDialog.Footer>
                     </AlertDialog.Dialog>
