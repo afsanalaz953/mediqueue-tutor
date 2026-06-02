@@ -15,6 +15,22 @@ const user = session?.user;
 console.log (user, "session");
 
 const handleBooking = async() =>{
+
+   // Frontend quick checks (optional, backend will also check)
+    if (allTutor.availableSlots <= 0) {
+      toast.error("No available slots left.", { position: "top-center" });
+      return;
+    }
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const startDate = new Date(allTutor.sessionStartDate);
+    startDate.setHours(0, 0, 0, 0);
+    if (today < startDate) {
+      toast.error(`Booking opens on ${allTutor.sessionStartDate}.`, { position: "top-center" });
+      return;
+    }
+
+    
   const bookingData = {
     userId:user?.id,
     userName: user.name,

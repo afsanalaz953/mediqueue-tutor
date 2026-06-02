@@ -17,6 +17,14 @@ const { tutorName, image, subject, location, hourlyFee, availableSlots, availabl
 //    console.log( id,"Details", tutorDetails); 
 
 
+ const isSlotAvailable = availableSlots > 0;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // ignore time
+  const startDate = new Date(sessionStartDate);
+  startDate.setHours(0, 0, 0, 0);
+  const isBookingAllowed = isSlotAvailable && (today >= startDate);
+
+
 
     return (
         <div className="container ">
@@ -26,7 +34,7 @@ const { tutorName, image, subject, location, hourlyFee, availableSlots, availabl
              alt="Tutor Image"
          className=" cover w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
         src={image}
-            width={500}
+            width={1500}
         height={1000}         
            />
              </div>
@@ -79,7 +87,18 @@ const { tutorName, image, subject, location, hourlyFee, availableSlots, availabl
                   <p className='font-bold text-black text-lg'> Teaching Mode: </p>
                       <p className='text-slate-500 ' > {teachingMode} </p> 
                 </div>
+                {/* ----- */}
                 <div>
+ {!isSlotAvailable && (
+              <p className="text-red-500 text-sm mt-2">No available slots left.</p>
+            )}
+            {isSlotAvailable && !isBookingAllowed && today < startDate && (
+              <p className="text-red-500 text-sm mt-2">
+                Booking opens on {new Date(sessionStartDate).toLocaleDateString()}.
+              </p>
+            )}
+
+
                 <BookedModal  allTutor = {allTutor}  />       
                 </div>
         </div>
