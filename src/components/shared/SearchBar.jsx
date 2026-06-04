@@ -1,32 +1,42 @@
 "use client";
 
 import { Search } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
 
 
 const SearchBar = () => {
   const router = useRouter();
+   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [search, setSearch] = useState("");
 
-  // Sync input with URL query param on mount & URL changes
-  useEffect(() => {
-    const searchParam = searchParams.get("search") || "";
-    setSearch(searchParam);
-  }, [searchParams]);
+    const initialSearch = searchParams.get('search') || '';
+  const [searchTerm, setSearchTerm] = useState("initialSearch");
 
-  const handleSearch = () => {
-    const params = new URLSearchParams(searchParams.toString());
-    if (search.trim()) {
-      params.set("search", search.trim());
+const handleSearch = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+
+    const params = new URLSearchParams(searchParams);
+    if (value) {
+      params.set('search', value);
     } else {
-      params.delete("search");
+      params.delete('search');
     }
-    router.push(`/tutors?${params.toString()}`);
+    router.push(`${pathname}?${params.toString()}`);
   };
 
+  // Sync input with URL query param on mount & URL changes
+ 
+  useEffect(() => {
+    const currentSearch = searchParams.get("search") || "";
+   
+    if (currentSearch !== searchTerm) {
+      setSearchTerm(currentSearch);
+    }
+  }, [searchParams]);
+ 
   return (
   
  <div className="w-100 m-10 relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm focus-within:ring-4 focus-within:ring-blue-600/10 focus-within:border-blue-600 transition-all overflow-hidden">
@@ -34,18 +44,18 @@ const SearchBar = () => {
         <Search className="w-5 h-5" />
       </div>
       <input
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        value={searchTerm}
+        onChange={handleSearch}
         type="text"
-        placeholder="Search for tutors (e.g. Next.js, Web Design...)"
+        placeholder="Search for tutors "
         className="flex-1 h-14 px-4 outline-none bg-transparent text-slate-700 placeholder:text-slate-400"
       />
-      <button
+      {/* <button
         onClick={handleSearch}
         className="h-10 px-6 mr-2 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
       >
         Search
-      </button>
+      </button> */}
       
 </div>
 

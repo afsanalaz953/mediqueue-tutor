@@ -9,7 +9,7 @@ const TutorCard = ({allTutor}) => {
         return null;
     }
 
-    const { _id, tutorName, image, subject, location, hourlyFee, availableSlots, availableDays, timeSlot, institution, teachingMode } = allTutor;
+    const { _id, tutorName, image, subject, location, hourlyFee, availableSlots, availableDays, timeSlot, institution, teachingMode, sessionStartDate } = allTutor;
     return (
         <div >
  <div
@@ -58,7 +58,11 @@ const TutorCard = ({allTutor}) => {
                         {/* <BookOpen className="w-3.5 h-3.5" /> 24 Lessons */}
                         <p>{location}</p>
                     </span>
+                   
                 </div>
+                 <span>
+                        <p className=" text-xs text-slate-500 font-bold"> Session Start: {sessionStartDate} </p>
+                    </span>
 
                 <div className="pt-6 mt-auto border-t border-slate-100 flex justify-between items-center">
                     <span className="text-2xl font-black text-blue-600">${hourlyFee}</span>
