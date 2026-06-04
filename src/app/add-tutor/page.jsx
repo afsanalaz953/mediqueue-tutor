@@ -170,17 +170,7 @@ console.log( 'data after post',data);
                 </TextField>
               </div>
 
-              {/* Description
-              <div className="md:col-span-2">
-                <TextField name="description" isRequired>
-                  <Label>Description</Label>
-                  <TextArea
-                    placeholder="Describe the travel experience..."
-                    className="rounded-3xl"
-                  />
-                  <FieldError />
-                </TextField>
-              </div> */}
+              
          <div>
               <Select
                   name="teachingMode"

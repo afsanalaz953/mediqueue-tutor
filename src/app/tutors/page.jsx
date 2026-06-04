@@ -1,7 +1,8 @@
 import React from 'react';
 import TutorCard from "@/components/shared/tutorcard"
 import SearchBar from "@/components/shared/SearchBar"
-import SearchDate from "@/components/shared/SearchStartDate"
+import SearchStartDate from "@/components/shared/SearchStartDate"
+import SearchEndDate from "@/components/shared/SearchEndDate"
 
     // for search tutors api call
 const FullTutors = async({searchParams}) => {
@@ -30,7 +31,8 @@ const FullTutors = async({searchParams}) => {
             <h1 className='font-bold text-3xl text-center m-4'>All Tutors</h1>
             <div className='flex flex-2 gap-6'>
               <SearchBar />
-              <SearchDate />
+              <SearchStartDate />
+              <SearchEndDate />
             </div>
           
             <div className='container mx-auto grid grid-cols-3 gap-6'>
