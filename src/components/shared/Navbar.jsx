@@ -28,12 +28,13 @@ console.log (user, "user");
     
     return (
         <div className='flex flex-col-3 justify-between container mx-auto my-5 shadow-md p-4'>
-            <div className='flex gap-3'>
+            <div className='flex flex-col gap-3'>
             {/* <Image src={logo}
       alt="Picture of the author"
       width={50}
       height={50} /> */}
-            <p className='font-bold text-md text-green-500'>Tutors-Hunting</p> 
+              <p className='text-blue-600 font-bold text-lg'>MediQueue </p>
+            <p className='font-bold text-md text-green-600'>Tutors-Hunt</p> 
             </div>
             
                 <ul className='flex gap-4'>
