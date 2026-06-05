@@ -27,7 +27,7 @@ console.log (user, "user");
     };
     
     return (
-        <div className='flex flex-col-3 justify-between container mx-auto my-5 shadow-md p-4'>
+        <div className='flex flex-col-3 justify-between container mx-auto my-5 shadow-md p-4 '>
             <div className='flex flex-col gap-3'>
             {/* <Image src={logo}
       alt="Picture of the author"
