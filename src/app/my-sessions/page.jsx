@@ -6,6 +6,7 @@ import { Table } from '@heroui/react';
 import CancelledButton from "@/components/shared/CancelledButton";
 import {Button} from "@heroui/react"
 
+
 const MyBookingSessionsPage = async() => {
 
 const session = await auth.api.getSession({
@@ -24,7 +25,7 @@ const res = await fetch(`http://localhost:5000/booking/${user?.id}`,{
 const bookings = await res.json();
    console.log(bookings, "bookings")
 
-
+  
 
     return (
         <div className='container mx-auto'>
@@ -32,7 +33,7 @@ const bookings = await res.json();
 
         <div className='shadow-lg'>
 
- <Table className='w-min-700 bg-yellow-200 '>
+ <Table className='w-min-700 bg-yellow-200 my-10 '>
   <Table.ScrollContainer>
     <Table.Content aria-label="Team members" className='p-4'>
       <Table.Header>
@@ -60,7 +61,8 @@ const bookings = await res.json();
             <Table.Cell>{bookedData.userName}</Table.Cell>
             {/* <Table.Cell>{bookedData._id}</Table.Cell> */}
             <Table.Cell>{bookedData.userEmail}</Table.Cell>
-            <Table.Cell className="" >  <Button>{bookedData.teachingMode}</Button> </Table.Cell>
+            <Table.Cell className="" > {bookedData.tutorStatus}</Table.Cell> 
+            {/* <Table.Cell className="" > {Success || Cancelled}</Table.Cell> */}
             {/* <Table.Cell> <Button bookingId = {bookedData._id} /> </Table.Cell> */}
             <Table.Cell> <CancelledButton bookingId = {bookedData._id} /> </Table.Cell>
           </Table.Row>
@@ -69,7 +71,7 @@ const bookings = await res.json();
     </Table.Content>
   </Table.ScrollContainer>
 </Table>
-
+ 
  </div>
         </div>
     );

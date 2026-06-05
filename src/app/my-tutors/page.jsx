@@ -39,7 +39,7 @@ console.log(tutorList, "tutorlist")
                       <Table.Column className="text-lg font-bold" >Price</Table.Column>
                       <Table.Column  className="text-lg font-bold">Slots</Table.Column>
                        <Table.Column  className="text-lg font-bold">Status</Table.Column>
-                     <Table.Column>TutorId</Table.Column> 
+                      {/* <Table.Column>Registation Date</Table.Column>   */}
                       <Table.Column className="text-lg font-bold" >Session-Start-Date</Table.Column>
                       <Table.Column className="text-lg font-bold text-center"> Action</Table.Column>
                     </Table.Header>
@@ -60,7 +60,7 @@ console.log(tutorList, "tutorlist")
                           </Table.Cell>
                           <Table.Cell>{formTutors.tutorName}</Table.Cell>
                           <Table.Cell>{user.name}</Table.Cell>
-                           <Table.Cell>{formTutors._id}</Table.Cell>  
+                            {/* <Table.Cell>{formTutors.sessionStartDate}</Table.Cell>   */}
                           <Table.Cell>{formTutors.subject}</Table.Cell>                   
                           <Table.Cell>$ {formTutors.price}</Table.Cell>
                            <Table.Cell>{formTutors.totalSlots}</Table.Cell>

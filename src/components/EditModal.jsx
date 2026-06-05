@@ -3,7 +3,7 @@
 import React from 'react';
 import {Button, Input, ListBox, Label, Select, FieldError,  Modal, Surface, TextField} from "@heroui/react";
 import Image from "next/image";
-
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const EditModal = ({formTutors}) => {
@@ -15,6 +15,13 @@ const onSubmit = async(e) =>{
     const formData = new FormData(e.currentTarget)
     const allTutor = Object.fromEntries(formData.entries())
     console.log("allTutor", allTutor);
+
+  toast.success('Tutor updated ', {
+                  duration: 4000,
+                  position: 'top-center',
+      }); 
+      
+
 
  const res =  await fetch (`http://localhost:5000/my-tutors/${_id}`,{
 
@@ -51,6 +58,7 @@ console.log( 'data after post',data);
                  <form onSubmit={onSubmit}
                            className="p-2 space-y-8 m-2" 
                          >
+   <ToastContainer />                        
                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                              {/* Destination Name */}
                              <div className="md:col-span-2">

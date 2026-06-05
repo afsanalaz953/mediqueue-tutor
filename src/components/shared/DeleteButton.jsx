@@ -1,10 +1,15 @@
 "use client";
 import { AlertDialog, Button } from "@heroui/react";
-
+import { ToastContainer, toast } from 'react-toastify';
 
 const DeleteAddingButton = ({formTutorId}) => {
     console.log(formTutorId)
 const handleDeleteButton = async () =>{
+
+ toast.success('adding tutor deleted ', {
+                duration: 4000,
+                position: 'top-center',
+    }); 
 
 const res = await fetch(`http://localhost:5000/my-tutors/${formTutorId}`,{
 method: "DELETE",
@@ -29,8 +34,8 @@ window.location.reload();
             >
                 Cancel
             </Button> */}
-               <Button variant="danger" type= "submit">Belete</Button>
-
+               <Button variant="danger" type= "submit">Delete</Button>
+ <ToastContainer />
             <AlertDialog.Backdrop>
                 <AlertDialog.Container>
                     <AlertDialog.Dialog className="sm:max-w-100">

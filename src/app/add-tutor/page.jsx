@@ -3,7 +3,7 @@ import React from 'react';
 import {TextField, Label,Input,FieldError, Select,ListBox , Button, } from "@heroui/react"
 // import { auth } from "@/lib/auth"; // path to your Better Auth server instance
 // import { headers } from "next/headers";
-
+import { ToastContainer, toast } from 'react-toastify';
 
 const AddTutorPage = () => {
 const onSubmit = async(e) =>{
@@ -23,6 +23,12 @@ const onSubmit = async(e) =>{
     })
 const data = await res.json()
 console.log( 'data after post',data);
+
+  toast.success('Tutor added, see my-tutor-list ', {
+                duration: 3000,
+                position: 'top-center',
+    }); 
+
  if (res.ok) {
       e.target.reset(); // Reset the form after successful submission
     }
@@ -53,6 +59,7 @@ console.log( 'data after post',data);
                 <form onSubmit={onSubmit}
             className="p-10 space-y-8 m-10" 
           >
+             <ToastContainer />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Destination Name */}
               <div className="md:col-span-2">

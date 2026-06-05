@@ -1,21 +1,30 @@
 "use client";
 
-
+// import { ToastContainer, toast } from 'react-toastify';
 import { AlertDialog, Button } from "@heroui/react";
+import { useRouter } from "next/navigation";
 
 const CancelledBookingButton = ({bookingId}) => {
+   const router = useRouter();   
 const handleCancelBooking = async () =>{
 
+    // toast.success('Cancel booking ', {
+    //             duration: 4000,
+    //             position: 'top-center',
+    // }); 
+  
+    
 const res = await fetch(`http://localhost:5000/booking/${bookingId}`,{
-method: "DELETE",
+method: "PATCH",
 headers:{
     "content-type" : "application/json"
-}
+},
 })
 
 const data = await res.json();
 console.log(data);
-window.location.reload();
+// window.location.reload();
+  router.refresh();
 }
 
 
@@ -29,8 +38,9 @@ window.location.reload();
             >
                 Cancel
             </Button> */}
-               <Button variant="danger" type= "submit">Cancel</Button>
-
+             <AlertDialog.Trigger>
+                <Button variant="danger" type= "submit">Cancel</Button>
+             </AlertDialog.Trigger>
             <AlertDialog.Backdrop>
                 <AlertDialog.Container>
                     <AlertDialog.Dialog className="sm:max-w-100">

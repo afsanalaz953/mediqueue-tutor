@@ -52,10 +52,10 @@ const handleBooking = async() =>{
       })
       const data = await res.json();
 // Show success toast
-        toast.success('Session booking successful', {
-            duration: 2000,
-            position: 'top-center',
-});
+//         toast.success('Session booking successful', {
+//             duration: 2000,
+//             position: 'top-center',
+// });
 }
 
 
@@ -73,7 +73,10 @@ const onSubmit = async(e) =>{
     const allTutor = Object.fromEntries(formData.entries())
     console.log(allTutor);
 
- 
+  toast.success('Session booking successful', {
+            duration: 2000,
+            position: 'top-center',
+});
         
 // Navigation after success
         setTimeout(() => {
@@ -83,7 +86,7 @@ const onSubmit = async(e) =>{
  
     return (
         <>
-   
+    <ToastContainer />
 <Modal>
     <Button className="font-bold rounded-xl px-6 w-full">Book Session</Button>
       <Modal.Backdrop>
@@ -103,7 +106,7 @@ const onSubmit = async(e) =>{
             <Modal.Body className="p-6">
               <Surface variant="default">
                 <form  onSubmit={onSubmit} className="flex flex-col gap-4">
-               <ToastContainer />
+              
                   <TextField defaultValue={defaultName} className="w-full" name="name" type="text">
                     <Label>Student name</Label>
                     <Input
