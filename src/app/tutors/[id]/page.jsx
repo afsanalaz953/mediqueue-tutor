@@ -1,21 +1,30 @@
 
 import React from 'react';
 import Image from "next/image";
-
 import Link from "next/link";
 import { Button, Chip } from "@heroui/react";
 import { BookOpen, Clock } from "lucide-react";
 import BookedModal from "@/components/modal"
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 
 const TutorDetailsPage = async({params}) => {
-    const {id} = await params
+    const {id} = await params;
+    const tokenObj = await auth.api.getToken({
+        headers: await headers()
+    })
+      console.log(tokenObj)
 const res = await fetch(`http://localhost:5000/tutors/${id}`,{
-cache:"no-store"
-})
+cache:"no-store",
+headers:{
+    authorization: `Bearer ${tokenObj.token}`
+}
+});
+
 const allTutor = await res.json()
 const { tutorName, image, subject, location, hourlyFee, availableSlots, availableDays,sessionStartDate, timeSlot, institution, teachingMode} = allTutor;
 //    console.log( id,"Details", tutorDetails); 
-
+// const safeImage = image && image.trim() !== "" ? image : null;
 
  const isSlotAvailable = availableSlots > 0;
   const today = new Date();
@@ -27,16 +36,29 @@ const { tutorName, image, subject, location, hourlyFee, availableSlots, availabl
 
 
     return (
-        <div className="container ">
+        <div className="container "> 
         <div className='w-200 p-2 border-0 shadow-lg  grid grid-cols-2 gap-12 rounded-2xl h-130 bg-white container my-12 mx-auto '>
              <div className='divright w-100 h-full'>
-                <Image
+               <Image
              alt="Tutor Image"
          className=" cover w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
         src={image}
             width={1500}
         height={1000}         
-           />
+           /> 
+           {/* {safeImage ? (
+    <Image
+      alt="Tutor Image"
+      className="cover w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+      src={safeImage}
+      width={1500}
+      height={1000}         
+    />
+  ) : (
+    <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">
+      No Image Available
+    </div>
+  )} */}
              </div>
 <div className='cardleft mt-6 space-y-4'>
  <h1 className="text-3xl font-bold leading-tight line-clamp-2 hover:text-blue-600 transition-colors">

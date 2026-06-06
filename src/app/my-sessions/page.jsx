@@ -15,9 +15,17 @@ const session = await auth.api.getSession({
  const user = session?.user;
 console.log(session)
 
+const tokenObjData = await auth.api.getToken({
+        headers: await headers()
+    })
+      console.log(tokenObjData, "objData")
+
 // user id dhore ante hobe
 const res = await fetch(`http://localhost:5000/booking/${user?.id}`,{
    cache: 'no-store',
+    headers:{
+         authorization: `Bearer ${tokenObjData.token}`
+     }
 });
 
 

@@ -16,7 +16,18 @@ const session = await auth.api.getSession({
  const user = session?.user
 console.log(session, "formTutor")
 
-const res = await fetch ("http://localhost:5000/my-tutors/")
+ const tokenObjData = await auth.api.getToken({
+        headers: await headers()
+    })
+      console.log(tokenObjData, "obj")
+
+const res = await fetch ("http://localhost:5000/my-tutors/",{
+  headers:{
+      authorization: `Bearer ${tokenObjData.token}`
+  }
+});
+
+
 const tutorList = await res.json()
 console.log(tutorList, "tutorlist")
 

@@ -4,6 +4,7 @@ import {TextField, Label,Input,FieldError, Select,ListBox , Button, } from "@her
 // import { auth } from "@/lib/auth"; // path to your Better Auth server instance
 // import { headers } from "next/headers";
 import { ToastContainer, toast } from 'react-toastify';
+import { authClient } from '@/lib/auth-client';
 
 const AddTutorPage = () => {
 const onSubmit = async(e) =>{
@@ -12,11 +13,16 @@ const onSubmit = async(e) =>{
     const allTutor = Object.fromEntries(formData.entries())
     console.log("allTutor", allTutor);
 
+// verification for add-tutor
+const {data:tokenData} = await authClient.token()
+console.log(tokenData, "tokendata")
+
  const res =  await fetch ('http://localhost:5000/add-tutor',{
 
    method : 'POST',
    headers : {
-  'content-type' : 'application/json'
+  'content-type' : 'application/json',
+ authorization: `Bearer ${tokenData?.token}`
    
      }, 
     body: JSON.stringify(allTutor)
