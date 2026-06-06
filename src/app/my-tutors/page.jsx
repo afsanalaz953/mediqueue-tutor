@@ -27,14 +27,20 @@ console.log(tutorList, "tutorlist")
     return (
         <div className='container mx-auto  m-20 space-y-10'>
             <h1 className='font-bold text-3xl'>My Tutors List</h1>
-            <div className='shadow-lg'>
+   {/* ✅ Empty state check – put it here */}
+      {!tutorList || tutorList.length === 0 ? (
+        <div className="text-center p-10 m-6 bg-gray-100 rounded-lg shadow">
+          <p className="text-gray-600 text-lg"> No tutors available yet.</p>
+          <p className="text-gray-500">Click “Add Tutor” to get started.</p>
+        </div>
+      ) :( <div className='shadow-lg'>
               <Table className='w-min-700 bg-green-300 '>
                 <Table.ScrollContainer>
                   <Table.Content aria-label="Team members" className='p-3'>
                     <Table.Header className= "rounded ">
                       <Table.Column className="text-lg font-bold">Photo</Table.Column>
                       <Table.Column   isRowHeader className="text-lg font-bold">Tutor Name</Table.Column>
-                      <Table.Column className="text-lg font-bold" >Student Name</Table.Column>
+                      {/* <Table.Column className="text-lg font-bold" >Student Name</Table.Column> */}
                       <Table.Column className="text-lg font-bold" >Subject</Table.Column>
                       <Table.Column className="text-lg font-bold" >Price</Table.Column>
                       <Table.Column  className="text-lg font-bold">Slots</Table.Column>
@@ -59,7 +65,7 @@ console.log(tutorList, "tutorlist")
                             />
                           </Table.Cell>
                           <Table.Cell>{formTutors.tutorName}</Table.Cell>
-                          <Table.Cell>{user.name}</Table.Cell>
+                          {/* <Table.Cell>{user.name}</Table.Cell> */}
                             {/* <Table.Cell>{formTutors.sessionStartDate}</Table.Cell>   */}
                           <Table.Cell>{formTutors.subject}</Table.Cell>                   
                           <Table.Cell>$ {formTutors.price}</Table.Cell>
@@ -82,8 +88,9 @@ console.log(tutorList, "tutorlist")
               
 
 
-            </div>
-        </div>
+            </div> )
+}
+     </div>   
     );
 };
 

@@ -71,17 +71,7 @@ const { tutorName, image, subject, location, hourlyFee, availableSlots, availabl
                 <div>
                      <p className='font-bold text-black text-lg'> Session start day: </p>
                       <p className='text-slate-500 ' > {sessionStartDate} </p>  
-                      {/* <div className='text-slate-500'>
-    {availableDays && availableDays.length > 0 ? (
-      <ul className='list-disc list-inside'>
-        {availableDays.map((day, index) => (
-          <li key={index}>{day}</li>
-        ))}
-      </ul>
-    ) : (
-      <p>No available days</p>
-    )}
-  </div> */}
+                     
                 </div>
                 <div>
                   <p className='font-bold text-black text-lg'> Teaching Mode: </p>

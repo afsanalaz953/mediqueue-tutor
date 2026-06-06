@@ -30,20 +30,27 @@ const bookings = await res.json();
     return (
         <div className='container mx-auto'>
         <h1 className='font-bold text-3xl m-10'> My Bookings List</h1>
+        {/* ✅ Empty state check – put it here */}
+      {!bookings || bookings.length === 0 ? (
+        <div className="text-center m-6 p-10 bg-gray-100 rounded-lg shadow">
+          <p className="text-gray-600 text-lg"> No bookings available yet.</p>
+          <p className="text-gray-500">Click “Book Tutors” to get started.</p>
+        </div>
+      ) : 
 
-        <div className='shadow-lg'>
+       ( <div className='shadow-lg'>
 
  <Table className='w-min-700 bg-yellow-200 my-10 '>
   <Table.ScrollContainer>
     <Table.Content aria-label="Team members" className='p-4'>
       <Table.Header>
-        <Table.Column>Photo</Table.Column>
-        <Table.Column isRowHeader>Tutor Name</Table.Column>
-        <Table.Column>Student Name</Table.Column>
-        <Table.Column>User Email</Table.Column>
+        <Table.Column className= "font-bold text-lg">Photo</Table.Column>
+        <Table.Column className= "font-bold text-lg"  isRowHeader>Tutor Name</Table.Column>
+        <Table.Column className= "font-bold text-lg">Student Name</Table.Column>
+        <Table.Column className= "font-bold text-lg">User Email</Table.Column>
         {/* <Table.Column>booking Id</Table.Column> */}
-        <Table.Column>Status</Table.Column>
-        <Table.Column>Action</Table.Column>
+        <Table.Column className= "font-bold text-lg" >Status</Table.Column>
+        <Table.Column className= "font-bold text-lg" >Action</Table.Column>
       </Table.Header>
       <Table.Body>
         {bookings && bookings.map((bookedData) => (
@@ -72,7 +79,8 @@ const bookings = await res.json();
   </Table.ScrollContainer>
 </Table>
  
- </div>
+ </div>)
+}
         </div>
     );
 };

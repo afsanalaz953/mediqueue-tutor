@@ -35,7 +35,7 @@ window.location.reload();
                 Cancel
             </Button> */}
                <Button variant="danger" type= "submit">Delete</Button>
- <ToastContainer />
+
             <AlertDialog.Backdrop>
                 <AlertDialog.Container>
                     <AlertDialog.Dialog className="sm:max-w-100">

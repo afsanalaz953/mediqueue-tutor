@@ -7,6 +7,7 @@ import {Button, Input, Label, Modal, Surface, TextField} from "@heroui/react";
 import { ToastContainer, toast } from 'react-toastify';
 import { authClient } from "@/lib/auth-client"
 
+
 export function BookedModal({allTutor}){
   // users session
 const { data: session, isPending } = authClient.useSession();
@@ -51,11 +52,7 @@ const handleBooking = async() =>{
           body: JSON.stringify(bookingData)
       })
       const data = await res.json();
-// Show success toast
-//         toast.success('Session booking successful', {
-//             duration: 2000,
-//             position: 'top-center',
-// });
+
 }
 
 
@@ -78,15 +75,18 @@ const onSubmit = async(e) =>{
             position: 'top-center',
 });
         
-// Navigation after success
-        setTimeout(() => {
-            router.push('/my-sessions');
-        }, 2000);
-}
+// // Navigation after success
+      setTimeout(() => {
+          //  router.push('/my-sessions');
+ router.refresh();
+       }, 2000);
+
+// window.location.reload();
+ };
  
     return (
         <>
-    <ToastContainer />
+   
 <Modal>
     <Button className="font-bold rounded-xl px-6 w-full">Book Session</Button>
       <Modal.Backdrop>

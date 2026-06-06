@@ -60,27 +60,29 @@ console.log (user, "user");
       <h2>Hi,{user.name}</h2> 
                   </div>
                   <div></div>
-        
+                  
+                  <Link href="/login">
                     <button className='btn btn-success' 
                     onClick={async () => await authClient.signOut()} >
                        Log Out</button>
+                       </Link>
    </div>)
    
-                   :( <div className='flex gap-3'>
-                      <Button type="submit"  className=' bg-green-500' ><Link href = {'/login'}></Link> Log In </Button> 
+                 :( <div className='flex gap-3'>
+                   
                     
                    <Link href="/login">
   <Button type="submit" className="bg-green-500">
     Log In
   </Button>
-</Link>
+</Link> 
           <Link href="/register">
   <Button type="submit" className="bg-green-500">
     Register
   </Button>
 </Link>
                    
-         
+  {/* <Button type="submit"  className=' bg-green-500' ><Link href = {'/login'}></Link> Log In </Button>  */}
  {/* <Button type="submit"  className=' bg-green-500' ><Link href = {'/register'}></Link> Register </Button> */}
                     {/* <button className='btn btn-success'>
                         <Link href ={"/register"}>Register</Link>
