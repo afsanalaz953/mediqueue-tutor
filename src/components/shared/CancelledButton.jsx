@@ -4,40 +4,52 @@ import { ToastContainer, toast } from 'react-toastify';
 import { AlertDialog, Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
 
-const CancelledBookingButton = ({bookingId}) => {
-   const router = useRouter();   
-const handleCancelBooking = async () =>{
+const CancelledBookingButton = ({bookingId, status}) => {
+   const router = useRouter(); 
 
-   toast.success('Cancel booking ', {
-                duration: 2000,
-                position: 'top-center',
-     }); 
-  
-    
+   
+const handleCancelBooking = async () =>{ 
+//     const {data:tokenData} = await authClient.token()
+//   console.log(tokenData, "tokendata")
+
+try{    
 const res = await fetch(`http://localhost:5000/booking/${bookingId}`,{
 method: "PATCH",
 headers:{
-    "content-type" : "application/json"
-},
-})
+    "content-type" : "application/json"},
+//  authorization: `Bearer ${tokenData?.token}`
+});
 
 const data = await res.json();
 console.log(data);
 // window.location.reload();
-  router.refresh();
+if (res.ok)  {
+ toast.success('Booking cancelled');
+                // duration: 2000,
+                // position: 'top-center'})
+
+       router.refresh();           
+
+}else{
+   toast.error(data.message || 'problem in cancel');  
+     }
+    } catch (error) {
+      toast.error('try later');
+    }
 }
 
-
+if(status === "cancelled"){
+     return <Button variant="danger" isDisabled>Cancelled</Button>; 
+}
 
     return (
         
         <AlertDialog>
             
              <AlertDialog.Trigger>
-                <Button variant="danger" type= "submit">Cancel</Button>
+                <Button variant="danger">Cancel</Button> 
              </AlertDialog.Trigger>
-          
-            <AlertDialog.Backdrop>
+           <AlertDialog.Backdrop>
                 <AlertDialog.Container>
                     <AlertDialog.Dialog className="sm:max-w-100">
                         <AlertDialog.CloseTrigger />

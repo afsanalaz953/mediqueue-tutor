@@ -79,7 +79,7 @@ const bookings = await res.json();
             <Table.Cell className="" > {bookedData.tutorStatus}</Table.Cell> 
             {/* <Table.Cell className="" > {Success || Cancelled}</Table.Cell> */}
             {/* <Table.Cell> <Button bookingId = {bookedData._id} /> </Table.Cell> */}
-            <Table.Cell> <CancelledButton bookingId = {bookedData._id} /> </Table.Cell>
+            <Table.Cell> <CancelledButton bookingId = {bookedData._id} status={bookedData.tutorStatus}  /> </Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>

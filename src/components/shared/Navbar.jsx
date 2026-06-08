@@ -3,7 +3,8 @@ import React from 'react';
 // import logo from "@/assets/logo.png"
 import Image from "next/image"
 import {Button} from "@heroui/react";
-
+import ThemeToggle from "@/components/ThemeToggle"
+import DropDownHober from "@/components/homePage/DropDownHober"
 import Link from "next/link"
 import { usePathname } from 'next/navigation';
 import { authClient } from "@/lib/auth-client"
@@ -29,10 +30,6 @@ console.log (user, "user");
     return (
         <div className='flex flex-col-3 justify-between container mx-auto my-5 shadow-md p-4 '>
             <div className='flex flex-col gap-3'>
-            {/* <Image src={logo}
-      alt="Picture of the author"
-      width={50}
-      height={50} /> */}
               <p className='text-blue-600 font-bold text-lg'>MediQueue </p>
             <p className='font-bold text-md text-green-600'>Tutors-Hunt</p> 
             </div>
@@ -43,21 +40,22 @@ console.log (user, "user");
                     <li><Link href={"/add-tutor"} className={`${isActive ("/add-tutor") ? " border-b-4 border-b-green-600" : ""}`} >Add Tutor</Link></li>
                     <li><Link href={"/my-tutors"} className={`${isActive ("/my-tutors") ? " border-b-4 border-b-green-600" : ""}`} >My Tutors</Link></li>
                     <li><Link href={"/my-sessions"} className={`${isActive ("/my-sessions") ? " border-b-4 border-b-green-600" : ""}`} >My Sessions</Link></li>
-                    <li><Link href={"/profile"} className={`${isActive ("/profile") ? " border-b-4 border-b-green-600" : ""}`} >My Profile</Link></li>
-                    
+                    {/* <li><Link href={"/profile"} className={`${isActive ("/profile") ? " border-b-4 border-b-green-600" : ""}`} >My Profile</Link></li>
+                     */}
                 </ul> 
   <div className='flex gap-2  items-center'>
    {isPending ? <span className="loading loading-spinner text-success"></span> :
     user ? ( <div className='flex gap-2 items-center'> 
            
     <div className='rounded-full flex gap-2'> 
-        <Image src={user.image || userAvatar  }
+        {/* <Image src={user.image || userAvatar  }
         // referrerPolicy='no-referrer'
       alt=" author"
       width={50}
       height={50} 
-      />  
-      <h2>Hi,{user.name}</h2> 
+      />   */}
+      <DropDownHober />
+      <h2>{user.name}</h2> 
                   </div>
                   <div></div>
                   
@@ -89,6 +87,7 @@ console.log (user, "user");
                         </button> */}
                     
                     </div>)}
+                    <div> <ThemeToggle />  </div>
         </div>
         </div>
     );
