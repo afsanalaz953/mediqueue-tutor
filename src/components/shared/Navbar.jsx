@@ -59,11 +59,11 @@ console.log (user, "user");
                   </div>
                   <div></div>
                   
-                  <Link href="/login">
+                  {/* <Link href="/login">
                     <button className='btn btn-success' 
                     onClick={async () => await authClient.signOut()} >
                        Log Out</button>
-                       </Link>
+                       </Link> */}
    </div>)
    
                  :( <div className='flex gap-3'>

@@ -17,7 +17,7 @@ const onSubmit = async(e) =>{
 const {data:tokenData} = await authClient.token()
 console.log(tokenData, "tokendata")
 
- const res =  await fetch ('http://localhost:5000/add-tutor',{
+ const res =  await fetch (`${process.env.NEXT_PUBLIC_SERVER_URL}/add-tutor`,{
 
    method : 'POST',
    headers : {

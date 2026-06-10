@@ -22,6 +22,8 @@ const { register, handleSubmit,formState: { errors }} = useForm();
     image: image,
     password: password, // required
     callbackURL: "/login",
+    //  autoSignIn: false,
+    
   
 });
 console.log ("data:res",res, "Error",error);
@@ -30,6 +32,7 @@ if (error) {
     alert(error.message)
 }
  if (res) {
+// await authClient.signOut();
     alert("Signup Successful")
     router.push("/login")
  }   

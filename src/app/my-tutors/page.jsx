@@ -16,15 +16,17 @@ const session = await auth.api.getSession({
  const user = session?.user
 console.log(session, "formTutor")
 
- const tokenObjData = await auth.api.getToken({
-        headers: await headers()
-    })
-      console.log(tokenObjData, "obj")
+//  const tokenObjData = await auth.api.getToken({
+//         headers: await headers()
+//     })
+//       console.log(tokenObjData, "obj")
 
-const res = await fetch ("http://localhost:5000/my-tutors/",{
-  headers:{
-      authorization: `Bearer ${tokenObjData.token}`
-  }
+const res = await fetch (`${process.env.NEXT_PUBLIC_SERVER_URL}/my-tutors`,{
+  cache: 'no-store',
+  // headers:{
+  //     authorization: `Bearer ${tokenObjData.token}`
+      
+  // }
 });
 
 

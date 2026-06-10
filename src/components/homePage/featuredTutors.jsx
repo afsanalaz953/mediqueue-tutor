@@ -7,7 +7,7 @@ import TutorCard from "@/components/shared/tutorcard"
 // cache:"no-store"
 // }
 const FeatureTutors = async() => {
-  const res = await fetch(`http://localhost:5000/featured`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/featured`, {
     cache: "no-store",
   })
   if (!res.ok) {

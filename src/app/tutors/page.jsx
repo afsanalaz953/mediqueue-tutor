@@ -27,7 +27,7 @@ const FullTutors = async({searchParams}) => {
   if (endDate) params.append("endDate", endDate);
 
   const queryString = params.toString();
-  const url = `${process.env.NEXT_SERVER_URL}/tutors${queryString ? `?${queryString}` : ""}`;
+  const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/tutors${queryString ? `?${queryString}` : ""}`;
 
   // const res = await fetch(url);
   // const allTutors = await res.json();

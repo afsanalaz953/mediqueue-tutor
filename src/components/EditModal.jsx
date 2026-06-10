@@ -23,7 +23,7 @@ const onSubmit = async(e) =>{
       
 
 
- const res =  await fetch (`http://localhost:5000/my-tutors/${_id}`,{
+ const res =  await fetch (`${process.env.NEXT_PUBLIC_SERVER_URL}/my-tutors/${_id}`,{
 
    method : 'PATCH',
    headers : {

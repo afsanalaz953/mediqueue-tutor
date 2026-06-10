@@ -11,7 +11,7 @@ const handleDeleteButton = async () =>{
                 position: 'top-center',
     }); 
 
-const res = await fetch(`http://localhost:5000/my-tutors/${formTutorId}`,{
+const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-tutors/${formTutorId}`,{
 method: "DELETE",
 headers:{
     "content-type" : "application/json"

@@ -21,7 +21,7 @@ const tokenObjData = await auth.api.getToken({
       console.log(tokenObjData, "objData")
 
 // user id dhore ante hobe
-const res = await fetch(`http://localhost:5000/booking/${user?.id}`,{
+const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking/${user?.id}`,{
    cache: 'no-store',
     headers:{
          authorization: `Bearer ${tokenObjData.token}`
