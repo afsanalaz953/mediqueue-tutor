@@ -84,14 +84,14 @@ toast.success('Tutor added, see my-tutor-list ', {
   
 
     return (
-        <div>
+        <div className="p-5 max-w-7xl mx-auto">
             <h1 className='text-2xl font-bold text-blue-800 text-center my-8'>Add Tutor </h1>
-    <div className='formdata container mx-auto border-0 shadow-lg lg:w-3xl md:w-sm '>
+    <div className='formdata  border-0 shadow-lg w-3xl'>
                 <form onSubmit={onSubmit}
-            className="p-10 space-y-8 m-10" 
+            className="p-10 space-y-8 w-3xl " 
           >
              <ToastContainer />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2  gap-4">
               {/* Destination Name */}
               <div className="md:col-span-2">
                 <TextField name="tutorName" isRequired>
@@ -116,14 +116,14 @@ toast.success('Tutor added, see my-tutor-list ', {
                 <Select
                   name="subject"
                   isRequired
-                  className="rounded-2xl"
+                  className="w-full"
                   placeholder="Select subject"
                 >
-                  <Label>Subject</Label>
-                  <Select.Trigger className="rounded-2xl">
-                    <Select.Value />
-                    <Select.Indicator />
-                  </Select.Trigger>
+                  {/* <Label>Subject</Label>  */}
+                   <Select.Trigger className="rounded-2xl flex"> 
+                     <Select.Value />
+                     <Select.Indicator /> 
+                 </Select.Trigger> 
                   <Select.Popover>
                     <ListBox>
                       <ListBox.Item id="Computer Science" textValue="Computer Science">
@@ -216,10 +216,10 @@ toast.success('Tutor added, see my-tutor-list ', {
                   className="rounded-2xl"
                   placeholder="Select teaching mode"
                 >
-                  <Label>Teaching Mode</Label>
-                  <Select.Trigger className="rounded-2xl">
+                  {/* <Label>Teaching Mode</Label> */}
+                  <Select.Trigger className="rounded-2xl flex">
                     <Select.Value />
-                    <Select.Indicator />
+                    <Select.Indicator /> 
                   </Select.Trigger>
                   <Select.Popover>
                     <ListBox>
