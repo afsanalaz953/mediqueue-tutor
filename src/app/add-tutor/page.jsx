@@ -1,8 +1,7 @@
-"use client"
+ "use client"
 import React from 'react';
 import {TextField, Label,Input,FieldError, Select,ListBox , Button, } from "@heroui/react"
-// import { auth } from "@/lib/auth"; // path to your Better Auth server instance
-// import { headers } from "next/headers";
+
 import { ToastContainer, toast } from 'react-toastify';
 import { authClient } from '@/lib/auth-client';
 
@@ -10,19 +9,45 @@ const AddTutorPage = () => {
 const onSubmit = async(e) =>{
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
-    const allTutor = Object.fromEntries(formData.entries())
-    console.log("allTutor", allTutor);
+    // const allTutor = Object.fromEntries(formData.entries())
+    const formValues = Object.fromEntries(formData.entries());
 
-// verification for add-tutor
+    console.log(formValues, "formvalues")
+
+    // ক্লায়েন্ট সাইডে সেশন থেকে ইউজার আইডি নেওয়া (headers() ছাড়া)
+       const { data: session } = await authClient.getSession();
+    const userId = session?.user?.id;
+
+     // ইউজার আইডি পেলোডে যুক্ত করা (কোনো কনফ্লিক্ট নেই)
+    const allTutor = {
+      ...formValues,
+      userId:userId,
+    };
+    console.log("allTutor with userId", allTutor);
+
+// // for getting user id of single session
+//     const session = await auth.api.getSession({
+//          headers: await headers(), // you need to pass the headers object.
+//      });
+//      const user = session?.user?.id;
+//     console.log(session)
+   
+//     // ইউজার আইডি পেলোডে যুক্ত করুন
+//     const allTutor = {
+//         ...formValues,
+//         userId: userId,   // 👈 এই লাইন যোগ করুন
+//     };
+
+// Only clientside verification for add-tutor
 const {data:tokenData} = await authClient.token()
-console.log(tokenData, "tokendata")
+ console.log(tokenData, "tokendata")
 
  const res =  await fetch (`${process.env.NEXT_PUBLIC_SERVER_URL}/add-tutor`,{
 
    method : 'POST',
    headers : {
   'content-type' : 'application/json',
- authorization: `Bearer ${tokenData?.token}`
+   authorization: `Bearer ${tokenData?.token}`
    
      }, 
     body: JSON.stringify(allTutor)
@@ -30,7 +55,7 @@ console.log(tokenData, "tokendata")
 const data = await res.json()
 console.log( 'data after post',data);
 
-  toast.success('Tutor added, see my-tutor-list ', {
+toast.success('Tutor added, see my-tutor-list ', {
                 duration: 3000,
                 position: 'top-center',
     }); 
@@ -61,7 +86,7 @@ console.log( 'data after post',data);
     return (
         <div>
             <h1 className='text-2xl font-bold text-blue-800 text-center my-8'>Add Tutor </h1>
-    <div className='formdata container mx-auto border-0 shadow-lg w-3xl'>
+    <div className='formdata container mx-auto border-0 shadow-lg lg:w-3xl md:w-sm '>
                 <form onSubmit={onSubmit}
             className="p-10 space-y-8 m-10" 
           >

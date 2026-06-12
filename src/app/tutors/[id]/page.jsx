@@ -10,6 +10,7 @@ import { headers } from 'next/headers';
 
 const TutorDetailsPage = async({params}) => {
     const {id} = await params;
+    
     const tokenObj = await auth.api.getToken({
         headers: await headers()
     })

@@ -1,36 +1,70 @@
- import { betterAuth } from "better-auth";
- import { MongoClient } from "mongodb";
- import { mongodbAdapter } from "better-auth/adapters/mongodb";
-import { jwt } from "better-auth/plugins"
-// // mongodb+srv://<db_username>:<db_password>@cluster0.f0fuujx.mongodb.net/?appName=Cluster0
+//  import { betterAuth } from "better-auth";
+//  import { MongoClient } from "mongodb";
+//  import { mongodbAdapter } from "better-auth/adapters/mongodb";
+// import { jwt } from "better-auth/plugins"
+// // // mongodb+srv://<db_username>:<db_password>@cluster0.f0fuujx.mongodb.net/?appName=Cluster0
 
-const client = new MongoClient(process.env.MONGO_URI);
- const db = client.db('tutorData');
+// const client = new MongoClient(process.env.MONGO_URI);
+//  const db = client.db('tutorData');
 
- export const auth = betterAuth({
-   database: mongodbAdapter(db, {
-    // Optional: if you don't provide a client, database transactions won't be enabled.
-    client,
-  }),
- emailAndPassword: { 
-    enabled: true, 
- },
-socialProviders: {
-     google: { 
-        clientId: process.env.GOOGLE_CLIENT_ID, 
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET, 
-  }, 
+//  export const auth = betterAuth({
+//    database: mongodbAdapter(db, {
+//     // Optional: if you don't provide a client, database transactions won't be enabled.
+//     client,
+//   }),
+//  emailAndPassword: { 
+//     enabled: true, 
+//  },
+// socialProviders: {
+//      google: { 
+//         clientId: process.env.GOOGLE_CLIENT_ID, 
+//         clientSecret: process.env.GOOGLE_CLIENT_SECRET, 
+//   }, 
 
- },
- session : {
-   cookieCache: {
+//  },
+//  session : {
+//    cookieCache: {
+//       enabled: true,
+//       strategy: "jwt",
+//       maxAge:  7 * 24 * 60 * 60 // 7 days
+//    }
+//  },
+//  plugins: [
+//         jwt(), 
+//  ]
+
+// });
+
+
+import { betterAuth } from "better-auth";
+import { MongoClient } from "mongodb";
+import { mongodbAdapter } from "better-auth/adapters/mongodb";
+import { jwt } from "better-auth/plugins";
+
+if (!global._mongoClient) {
+  global._mongoClient = new MongoClient(process.env.MONGO_URI);
+  await global._mongoClient.connect();
+}
+
+const client = global._mongoClient;
+const db = client.db("tutorData");
+
+export const auth = betterAuth({
+  database: mongodbAdapter(db, { client }),
+  emailAndPassword: {
+    enabled: true,
+  },
+  socialProviders: {
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    },
+  },
+  session: {
+    cookieCache: {
       enabled: true,
-      strategy: "jwt",
-      maxAge:  7 * 24 * 60 * 60 // 7 days
-   }
- },
- plugins: [
-        jwt(), 
- ]
-
+      maxAge: 7 * 24 * 60 * 60,
+    },
+  },
+  plugins: [jwt()],
 });

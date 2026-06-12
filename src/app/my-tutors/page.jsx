@@ -7,6 +7,7 @@ import { auth } from "@/lib/auth"; // path to your Better Auth server instance
 import { headers } from "next/headers";
 import Image from "next/image";
 import EditModal from "@/components/EditModal"
+import { authClient } from '@/lib/auth-client';
 
 
 const MyTutorPage = async() => {
@@ -14,20 +15,35 @@ const session = await auth.api.getSession({
     headers: await headers() // you need to pass the headers object.
  });
  const user = session?.user
+  // সেশন না থাকলে এরর বা রিডাইরেক্ট
+  if (!user) {
+    console.error("No session found");
+    return <div>Unauthorized: Please login</div>;
+  }
 console.log(session, "formTutor")
 
-//  const tokenObjData = await auth.api.getToken({
-//         headers: await headers()
-//     })
-//       console.log(tokenObjData, "obj")
+// my-tutor servertoken data and verify
 
-const res = await fetch (`${process.env.NEXT_PUBLIC_SERVER_URL}/my-tutors`,{
+ const tokenObj = await auth.api.getToken({
+        headers: await headers()
+    })
+   console.log(tokenObj, "objtutor")
+
+
+const res = await fetch (`${process.env.NEXT_PUBLIC_SERVER_URL}/my-tutors/${user?.id}`,{
   cache: 'no-store',
-  // headers:{
-  //     authorization: `Bearer ${tokenObjData.token}`
+   headers:{
+     authorization: `Bearer ${tokenObj.token}`
       
-  // }
+ }
 });
+
+
+ if (!res.ok) {
+    const errorText = await res.text();
+    console.error(`API error ${res.status}: ${errorText}`);
+    return <div>Failed to load tutors</div>;
+  }
 
 
 const tutorList = await res.json()
@@ -39,7 +55,7 @@ console.log(tutorList, "tutorlist")
 
     return (
         <div className='container mx-auto  m-20 space-y-10'>
-            <h1 className='font-bold text-3xl'>My Tutors List</h1>
+            <h1 className='font-bold text-center lg:text-3xl'>My Tutors List</h1>
    {/* ✅ Empty state check – put it here */}
       {!tutorList || tutorList.length === 0 ? (
         <div className="text-center p-10 m-6 bg-gray-100 rounded-lg shadow">
@@ -47,7 +63,8 @@ console.log(tutorList, "tutorlist")
           <p className="text-gray-500">Click “Add Tutor” to get started.</p>
         </div>
       ) :( <div className='shadow-lg'>
-              <Table className='w-min-700 bg-green-300 '>
+              {/* <Table className=' w-min-700  bg-green-200'> */}
+              <Table className="lg:w-full md:`w-[760px]` bg-green-200">
                 <Table.ScrollContainer>
                   <Table.Content aria-label="Team members" className='p-3'>
                     <Table.Header className= "rounded ">

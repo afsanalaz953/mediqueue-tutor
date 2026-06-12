@@ -47,10 +47,10 @@ if (error) {
             <div className='bg-white rounded-xl w-150 container mx-auto p-10 my-6 flex gap-4 flex-col justify-center items-center'>
                 <h2 className='font-bold text-2xl'> Register</h2>
 
-<form onSubmit={handleSubmit(handleRegisterFunc)} className='space-y-6 mt-4'>
+<form onSubmit={handleSubmit(handleRegisterFunc)} className='space-y-2 mt-4'>
                     <fieldset className="fieldset">
   <legend className="fieldset-legend">Name</legend>
-  <input type="text" className="input w-100 border-2" placeholder="Enter Your Name" {...register("name", {
+  <input type="text" className="input  border-2" placeholder="Enter Your Name" {...register("name", {
     required: "name is required",
   })} />
 {errors.name && <p> {errors.name.message} </p>} 

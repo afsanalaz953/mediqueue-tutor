@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 import Image from "next/image";
 import { Table } from '@heroui/react';
 import CancelledButton from "@/components/shared/CancelledButton";
-import {Button} from "@heroui/react"
+
 
 
 const MyBookingSessionsPage = async() => {
@@ -18,20 +18,17 @@ console.log(session)
 const tokenObjData = await auth.api.getToken({
         headers: await headers()
     })
-      console.log(tokenObjData, "objData")
+     console.log(tokenObjData, "objData")
 
 // user id dhore ante hobe
 const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking/${user?.id}`,{
    cache: 'no-store',
-    headers:{
-         authorization: `Bearer ${tokenObjData.token}`
-     }
+  headers:{
+    authorization: `Bearer ${tokenObjData.token}`
+    }    
 });
-
-
-
 const bookings = await res.json();
-   console.log(bookings, "bookings")
+ console.log(bookings, "bookings")
 
   
 
@@ -48,7 +45,7 @@ const bookings = await res.json();
 
        ( <div className='shadow-lg'>
 
- <Table className='w-min-700 bg-yellow-200 my-10 '>
+ <Table className='lg:w-min-700 bg-yellow-200 my-10 md:`w-[760px]` '>
   <Table.ScrollContainer>
     <Table.Content aria-label="Team members" className='p-4'>
       <Table.Header>

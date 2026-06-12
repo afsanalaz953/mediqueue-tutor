@@ -51,16 +51,16 @@ try {
 
 
     return (
-        <div>
+        <div className='container mx-auto '> 
             <h1 className='font-bold text-3xl text-center m-4'>All Tutors</h1>
-            <div className='flex flex-2 gap-2'>
+            <div className='flex lg:flex-2  md: flex-1 gap-2'>
               <SearchBar />
               <SearchStartDate />
               <SearchEndDate />
               <ResetFilter />
             </div>
           
-            <div className='container mx-auto grid grid-cols-3 gap-6'>
+            <div className='container mx-auto grid md:grid-cols-2  lg:grid-cols-3 gap-6'>
                 
            {allTutors?.map(allTutor =>  < TutorCard key = {allTutor?._id} allTutor = {allTutor} />
            
