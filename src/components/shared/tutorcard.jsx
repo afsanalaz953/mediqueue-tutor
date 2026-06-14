@@ -29,14 +29,14 @@ const TutorCard = ({allTutor}) => {
                 {/* </div> */}
             </div> 
             
-            <div className="p-2 flex flex-col grow space-y-4">
+            <div className="p-2 m-4 flex flex-col grow space-y-4">
                  <div>
                     <Chip
                         color="primary"
                         variant="solid"
                         className=" items-center font-bold shadow-lg shadow-blue-600/20"
                     >
-                        {subject}
+                        {allTutor.subject}
                     </Chip>
                  </div>
                 <div className="space-y-2">
@@ -56,7 +56,7 @@ const TutorCard = ({allTutor}) => {
                     </span>
                     <span className="flex items-center gap-1">
                         {/* <BookOpen className="w-3.5 h-3.5" /> 24 Lessons */}
-                        <p>{location}</p>
+                        <p>Location: {location}</p>
                     </span>
                    
                 </div>

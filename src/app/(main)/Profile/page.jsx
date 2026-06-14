@@ -33,7 +33,7 @@ console.log (user, "profilesession");
     <h2 className="card-title font-bold text-3xl">{user?.name}</h2>
     <p className='text-lg'> {user?.email} </p>
     <div className="card-actions">
-         <Button type="submit"  className='w-full' ><Link href = '/updateform'></Link> Update Profile </Button>
+         <Button type="submit"  className='w-full' ><Link href ={"/"} ></Link> Go Back to Home </Button>
       {/* <button className="btn btn-primary"><Link href= '/updateform'>Update Profile</Link></button> */}
     </div>
   </div>

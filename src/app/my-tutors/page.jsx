@@ -98,8 +98,8 @@ console.log(tutorList, "tutorlist")
                           {/* <Table.Cell>{user.name}</Table.Cell> */}
                             {/* <Table.Cell>{formTutors.sessionStartDate}</Table.Cell>   */}
                           <Table.Cell>{formTutors.subject}</Table.Cell>                   
-                          <Table.Cell>$ {formTutors.price}</Table.Cell>
-                           <Table.Cell>{formTutors.totalSlots}</Table.Cell>
+                          <Table.Cell>$ {formTutors.hourlyFee}</Table.Cell>
+                           <Table.Cell>{formTutors.availableSlots}</Table.Cell>
                             <Table.Cell>{formTutors.teachingMode}</Table.Cell>
                         
                           <Table.Cell> {formTutors.sessionStartDate}</Table.Cell >

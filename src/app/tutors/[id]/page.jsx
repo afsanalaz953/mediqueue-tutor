@@ -23,6 +23,7 @@ headers:{
 });
 
 const allTutor = await res.json()
+console.log(allTutor,"booked tutor")
 const { tutorName, image, subject, location, hourlyFee, availableSlots, availableDays,sessionStartDate, timeSlot, institution, teachingMode} = allTutor;
 //    console.log( id,"Details", tutorDetails); 
 // const safeImage = image && image.trim() !== "" ? image : null;
@@ -87,10 +88,10 @@ const { tutorName, image, subject, location, hourlyFee, availableSlots, availabl
                         Available slots <span className="text-slate-900">{availableSlots}</span>
                     </p>
                 </div>
-                <div>
+                {/* <div>
                     <p className='font-bold text-black text-lg'> Institution: </p>
                       <p className='text-slate-500 '> {institution} </p>     
-                </div>
+                </div> */}
                 <div>
                      <p className='font-bold text-black text-lg'> Session start day: </p>
                       <p className='text-slate-500 ' > {sessionStartDate} </p>  
@@ -109,10 +110,14 @@ const { tutorName, image, subject, location, hourlyFee, availableSlots, availabl
               <p className="text-red-500 text-sm mt-2">
                 Booking opens on {new Date(sessionStartDate).toLocaleDateString()}.
               </p>
+             
             )}
+            <div>
+  <BookedModal  allTutor = {allTutor}  />  
+            </div>
+ 
 
-
-                <BookedModal  allTutor = {allTutor}  />       
+                   
                 </div>
         </div>
              </div>

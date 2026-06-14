@@ -6,6 +6,7 @@ import {authClient} from "@/lib/auth-client";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { useState } from 'react';
 import {Button} from "@heroui/react";
+import {ForgotPasswordModal } from "@/components/ForgotPasswordModal"
 
 
 
@@ -20,7 +21,7 @@ const { register, handleSubmit,  formState: { errors }} = useForm ();
 //   } = useForm
 
 const [isShowPassword, setIsShowPassword] = useState(false);
-
+ const [isForgotDialogOpen, setIsForgotDialogOpen] = useState(false);
 const handleGoogleSignin = async () => {
 const data = await authClient.signIn.social({
  provider: "google",
@@ -51,6 +52,34 @@ if (error) {
  } 
 };
 
+// new for forgot password
+const handleSendResetLink = async () => {
+    if (!resetEmail) {
+      setResetMessage("Email Address");
+      return;
+    }
+    try {
+      const { data, error } = await authClient.forgetPassword({
+        email: resetEmail,
+        redirectTo: window.location.origin + "/reset-password", // আপনার রিসেট পেজের লিংক
+      });
+      if (error) {
+        setResetMessage(error.message);
+      } else {
+        setResetMessage("password reset link has passed to your email");
+        // ৩ সেকেন্ড পর ডায়ালগ বন্ধ করা যেতে পারে
+        setTimeout(() => {
+          setIsForgotDialogOpen(false);
+          setResetMessage("");
+          setResetEmail("");
+        }, 3000);
+      }
+    } catch (err) {
+      setResetMessage("Try Again");
+    }
+  };
+
+
     return (
     <div className='bg-slate-200 container mx-auto '>
             
@@ -74,6 +103,16 @@ if (error) {
     </span>
  {errors.password && <p> password is required </p>} 
 </fieldset>
+  {/* নতুন অংশ: ফরগট পাসওয়ার্ড লিংক */}
+          <div className="text-right">
+            <button
+              type="button"
+              className="text-sm text-blue-600 hover:underline"
+              onClick={() => setIsForgotDialogOpen(true)}
+            >
+              Forgot Password?
+            </button>
+          </div>
 
  
 <br />
@@ -89,7 +128,11 @@ if (error) {
 <span className='text-sm text-green-600 font-bold'><Link href= "/register"> Register </Link></span>
                  </form>
                 </div>  
-      
+     {/* মডাল কম্পোনেন্ট ব্যবহার */}
+      <ForgotPasswordModal
+        isOpen={isForgotDialogOpen}
+        onClose={() => setIsForgotDialogOpen(false)}
+      /> 
         </div>  
     );
 };

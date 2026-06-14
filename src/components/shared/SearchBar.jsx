@@ -12,7 +12,7 @@ const SearchBar = () => {
   const searchParams = useSearchParams();
 
     const initialSearch = searchParams.get('search') || '';
-  const [searchTerm, setSearchTerm] = useState("initialSearch");
+  const [searchTerm, setSearchTerm] = useState(initialSearch);
 
 const handleSearch = (e) => {
     const value = e.target.value;

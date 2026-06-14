@@ -37,9 +37,13 @@ console.log (user, "user");
                 <ul className='flex gap-4'>
                     <li><Link href={"/"} className={`${isActive ("/") ? " border-b-4 border-b-green-600": "" }`}  >Home</Link></li>
                     <li><Link href={"/tutors"} className={`${isActive ("/tutors") ? " border-b-4 border-b-green-600" : ""}`} >Tutors</Link></li>
-                    <li><Link href={"/add-tutor"} className={`${isActive ("/add-tutor") ? " border-b-4 border-b-green-600" : ""}`} >Add Tutor</Link></li>
+                    {user && (
+                      <>
+                       <li><Link href={"/add-tutor"} className={`${isActive ("/add-tutor") ? " border-b-4 border-b-green-600" : ""}`} >Add Tutor</Link></li>
                     <li><Link href={"/my-tutors"} className={`${isActive ("/my-tutors") ? " border-b-4 border-b-green-600" : ""}`} >My Tutors</Link></li>
                     <li><Link href={"/my-sessions"} className={`${isActive ("/my-sessions") ? " border-b-4 border-b-green-600" : ""}`} >My Sessions</Link></li>
+                      </>
+                    )}
                     {/* <li><Link href={"/profile"} className={`${isActive ("/profile") ? " border-b-4 border-b-green-600" : ""}`} >My Profile</Link></li>
                      */}
                 </ul> 

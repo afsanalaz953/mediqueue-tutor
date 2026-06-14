@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 
 const EditModal = ({formTutors}) => {
- const {_id, tutorName, totalSlots, imageUrl, price, sessionStartDate, subject, teachingMode } = formTutors
+ const {_id, tutorName, availableSlots, image, hourlyFee, location, sessionStartDate, subject, teachingMode } = formTutors
 
 
 const onSubmit = async(e) =>{
@@ -70,7 +70,7 @@ console.log( 'data after post',data);
                              </div>
                
                              {/* Country */}
-                             <TextField defaultValue = {totalSlots}   name="totalSlots" type="number" isRequired>
+                             <TextField defaultValue = {availableSlots}   name="availableSlots" type="number" isRequired>
                                <Label>Total Slots</Label>
                                <Input 
                                type="number"
@@ -88,7 +88,7 @@ console.log( 'data after post',data);
                                  className="rounded-2xl"
                                  placeholder="Select subject"
                                >
-                                 <Label>Subject</Label>
+                                 {/* <Label>Subject</Label> */}
                                  <Select.Trigger className="rounded-2xl">
                                    <Select.Value />
                                    <Select.Indicator />
@@ -135,8 +135,8 @@ console.log( 'data after post',data);
                              </div>
                
                              {/* Price */}
-                             <TextField  defaultValue = {price}  name="price" type="number" isRequired>
-                               <Label>Price (USD)</Label>
+                             <TextField  defaultValue = {hourlyFee}  name="hourlyFee" type="number" isRequired>
+                               <Label>hourlyFee(USD)</Label>
                                <Input
                                  type="number"
                                  placeholder="1000"
@@ -156,7 +156,7 @@ console.log( 'data after post',data);
                
                              {/* Image URL - Removed preview */}
                              <div className="md:col-span-2">
-                               <TextField  defaultValue = {imageUrl}   name="imageUrl" isRequired>
+                               <TextField  defaultValue = {image}   name="image" isRequired>
                                  <Label>Image URL</Label>
                                  <Input
                                    type="url"
@@ -176,7 +176,7 @@ console.log( 'data after post',data);
                                  className="rounded-2xl"
                                  placeholder="Select teaching mode"
                                >
-                                 <Label>Teaching Mode</Label>
+                                 {/* <Label>Teaching Mode</Label> */}
                                  <Select.Trigger className="rounded-2xl">
                                    <Select.Value />
                                    <Select.Indicator />
