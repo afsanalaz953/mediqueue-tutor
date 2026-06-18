@@ -86,7 +86,7 @@ console.log(tutorList, "tutorlist")
                           <Table.Row key={formTutors?._id}>
                           <Table.Cell>
                             <Image
-                              src={formTutors?.imageUrl || ""}
+                              src={formTutors?.image|| ""}
                               alt={formTutors.tutorName}
                               width={70}
                               height={70}

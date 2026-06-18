@@ -11,21 +11,24 @@ import { headers } from 'next/headers';
 const TutorDetailsPage = async({params}) => {
     const {id} = await params;
     
-    const tokenObj = await auth.api.getToken({
-        headers: await headers()
-    })
+ const tokenObj = await auth.api.getToken({
+       headers: await headers()
+     })
       console.log(tokenObj)
 const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/tutors/${id}`,{
 cache:"no-store",
 headers:{
-    authorization: `Bearer ${tokenObj.token}`
-}
+      authorization: `Bearer ${tokenObj.token}`
+   }
 });
 
-const allTutor = await res.json()
+if (!res.ok) {
+  throw new Error(`Failed to fetch tutor: ${res.status}`);
+}
+const allTutor = await res.json();
 console.log(allTutor,"booked tutor")
 const { tutorName, image, subject, location, hourlyFee, availableSlots, availableDays,sessionStartDate, timeSlot, institution, teachingMode} = allTutor;
-//    console.log( id,"Details", tutorDetails); 
+    // console.log( id,"Details", tutorDetails); 
 // const safeImage = image && image.trim() !== "" ? image : null;
 
  const isSlotAvailable = availableSlots > 0;
@@ -83,7 +86,7 @@ const { tutorName, image, subject, location, hourlyFee, availableSlots, availabl
                     </span>
                 </div>
          <div className=" grid grid-cols-2 mt-auto border-t border-slate-100  gap-3 items-center">
-                    <span className="text-sm  bg-purple-100 p-4 rounded-2xl font-black text-blue-600"> Hourly Fee: ${hourlyFee}</span>
+                    <span className="text-sm  bg-purple-100 p-4 rounded-2xl font-black text-blue-600"> Hourly Fee: ${allTutor.hourlyFee}</span>
                <p className="text-sm  bg-sky-100 p-4 rounded-2xl text-slate-500 font-medium flex items-center gap-1">
                         Available slots <span className="text-slate-900">{availableSlots}</span>
                     </p>
@@ -105,7 +108,7 @@ const { tutorName, image, subject, location, hourlyFee, availableSlots, availabl
                 <div>
  {!isSlotAvailable && (
               <p className="text-red-500 text-sm mt-2">No available slots left.</p>
-            )}
+            )} 
             {isSlotAvailable && !isBookingAllowed && today < startDate && (
               <p className="text-red-500 text-sm mt-2">
                 Booking opens on {new Date(sessionStartDate).toLocaleDateString()}.

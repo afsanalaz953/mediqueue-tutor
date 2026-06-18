@@ -22,6 +22,8 @@ const onSubmit = async(e) =>{
     const allTutor = {
       ...formValues,
       userId:userId,
+       availableSlots: Number(formValues.availableSlots) || 0,
+       hourlyFee: Number(formValues.hourlyFee) || 0, 
     };
     console.log("allTutor with userId", allTutor);
 
@@ -136,10 +138,10 @@ toast.success('Tutor added, see my-tutor-list ', {
                 name="subject"
                   isRequired
                   placeholder="Select subject"
-                  className="w-full text-center"
+                  className="w-full"
                   >
-                  {/* <Label>Subject</Label>  */}
-                   <Select.Trigger className="rounded-full flex w-full text-center "> 
+                  <Label className='p-3'>Subject</Label>  
+                   <Select.Trigger > 
                      <Select.Value />
                      <Select.Indicator /> 
                  </Select.Trigger> 
@@ -238,7 +240,7 @@ toast.success('Tutor added, see my-tutor-list ', {
                   className="rounded-2xl"
                   placeholder="Select Status"
                 >
-                  {/* <Label>Status</Label>  */}
+                  <Label>Status</Label> 
                   <Select.Trigger className="rounded-2xl flex">
                     <Select.Value />
                     <Select.Indicator /> 
@@ -272,7 +274,7 @@ toast.success('Tutor added, see my-tutor-list ', {
                   className="rounded-2xl"
                   placeholder="Select teaching mode"
                 >
-                  {/* <Label>Teaching Mode</Label> */}
+               <Label>Teaching Mode</Label> 
                   <Select.Trigger className="rounded-2xl flex">
                     <Select.Value />
                     <Select.Indicator /> 
@@ -308,7 +310,7 @@ toast.success('Tutor added, see my-tutor-list ', {
                   className="rounded-2xl"
                   placeholder="Select timeSlot"
                 >
-                  {/* <Label>Teaching Mode</Label> */}
+                  <Label>Time Slot</Label> 
                   <Select.Trigger className="rounded-2xl flex">
                     <Select.Value />
                     <Select.Indicator /> 
@@ -346,7 +348,7 @@ toast.success('Tutor added, see my-tutor-list ', {
                   className="rounded-2xl"
                   placeholder="Select location"
                 >
-                  {/* <Label>Teaching Mode</Label> */}
+                  <Label>Location</Label> 
                   <Select.Trigger className="rounded-2xl flex">
                     <Select.Value />
                     <Select.Indicator /> 

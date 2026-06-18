@@ -25,7 +25,7 @@ const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking/${user?.i
    cache: 'no-store',
   headers:{
     authorization: `Bearer ${tokenObjData.token}`
-    }    
+     }    
 });
 const bookings = await res.json();
  console.log(bookings, "bookings")
@@ -58,7 +58,8 @@ const bookings = await res.json();
         <Table.Column className= "font-bold text-lg" >Action</Table.Column>
       </Table.Header>
       <Table.Body>
-        {bookings && bookings.map((bookedData) => (
+         {bookings && bookings.map((bookedData) => ( 
+      
           <Table.Row key={bookedData?._id}>
             <Table.Cell>
               <Image
