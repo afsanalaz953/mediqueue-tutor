@@ -21,4 +21,4 @@ Institue, and also their available slots and time.
 
 
 Live Link
-https://express-assi-client.vercel.app
+https://tutorhunt-client.vercel.app
